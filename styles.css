@@ -10,12 +10,12 @@ body {
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background-color: #f4f4f4;
+  background-color: #15273a;
 }
 
 .game-container {
   text-align: center;
-  background-color: white;
+  background-color: #333a46;
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -25,7 +25,7 @@ body {
 h1 {
   margin-bottom: 20px;
   font-size: 24px;
-  color: #333;
+  color: #fff;
 }
 
 .row {
@@ -58,12 +58,13 @@ h1 {
 .status-text {
   font-size: 18px;
   margin-bottom: 10px;
+  color: #fff;
 }
 
 .restart-button {
   padding: 10px 20px;
   font-size: 16px;
-  background-color: #4caf50;
+  background-color: #4c77af;
   color: white;
   border: none;
   border-radius: 5px;
@@ -72,5 +73,5 @@ h1 {
 }
 
 .restart-button:hover {
-  background-color: #45a049;
+  background-color: #c74509;
 }
