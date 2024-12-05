@@ -37,14 +37,14 @@ cells.forEach((cell, index) => {
 });
 
 function cellCheck(selectedCell, index) {
-  if (index === 0) {
+  if (index === 0 || index === 1 || index === 2) {
     gameBoard.row1.push(selectedCell);
     console.log(gameBoard);
-  } else if (index === 1) {
-    gameBoard.row1.push(selectedCell);
+  } else if (index === 3 || index === 4 || index === 5) {
+    gameBoard.row2.push(selectedCell);
     console.log(gameBoard);
-  } else if (index === 2) {
-    gameBoard.row1.push(selectedCell);
+  } else if (index === 6 || index === 7 || index === 8) {
+    gameBoard.row3.push(selectedCell);
     console.log(gameBoard);
   }
 }
