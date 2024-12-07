@@ -37,6 +37,7 @@ function winnerCheck() {
   winnerCheckHorizontalO();
   winnerCheckVerticalX();
   winnerCheckVerticalO();
+  krisCrossX();
 }
 function restartGame() {
   Object.entries(gameBoard).forEach(([key, array]) => {
@@ -173,15 +174,34 @@ function winnerCheckVerticalO() {
     console.log("X wins vertically third row");
   }
 }
-// function cellCheck(selectedCell, index) {
-//   if (index === 0 || index === 1 || index === 2) {
-//     gameBoard.row1.push(selectedCell.innerHTML);
-//     // console.log(gameBoard);
-//   } else if (index === 3 || index === 4 || index === 5) {
-//     gameBoard.row2.push(selectedCell.innerHTML);
-//     // console.log(gameBoard);
-//   } else if (index === 6 || index === 7 || index === 8) {
-//     gameBoard.row3.push(selectedCell.innerHTML);
-//     // console.log(gameBoard);
-//   }
-// }
+function krisCrossX() {
+  if (
+    gameBoard.row1[0] === "X" &&
+    gameBoard.row2[1] === "X" &&
+    gameBoard.row3[2] === "X"
+  ) {
+    console.log("X wins krisCross");
+  } else if (
+    gameBoard.row1[2] === "X" &&
+    gameBoard.row2[1] === "X" &&
+    gameBoard.row3[0] === "X"
+  ) {
+    console.log("X Wins krisCross");
+  }
+}
+
+function krisCrossX() {
+  if (
+    gameBoard.row1[0] === "O" &&
+    gameBoard.row2[1] === "O" &&
+    gameBoard.row3[2] === "O"
+  ) {
+    console.log("O wins krisCross");
+  } else if (
+    gameBoard.row1[2] === "O" &&
+    gameBoard.row2[1] === "O" &&
+    gameBoard.row3[0] === "O"
+  ) {
+    console.log("O Wins krisCross");
+  }
+}
