@@ -20,6 +20,9 @@ function restartGame() {
   Object.keys(gameBoard).forEach((key) => {
     // Fill each array with empty strings (same length as before)
     gameBoard[key] = new Array(gameBoard[key].length).fill("");
+    cells.forEach((cell) => {
+      cell.innerHTML = "";
+    });
   });
 }
 cells.forEach((cell, index) => {
