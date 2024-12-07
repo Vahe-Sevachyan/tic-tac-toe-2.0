@@ -10,6 +10,11 @@
   <body>
     <div class="game-container">
       <h1>Tic-Tac-Toe</h1>
+      <div class="difficulty-container">
+        <button class="easy">Easy</button>
+        <button class="medium">Medium</button>
+        <button class="hard">Hard</button>
+      </div>
       <div class="board">
         <div class="row">
           <div class="cell"></div>
@@ -27,9 +32,11 @@
           <div class="cell"></div>
         </div>
       </div>
+      <div id="timer">10</div>
+      <div class="gameOver-text"></div>
       <div class="status">
         <p class="status-text">Player X's turn</p>
-        <button class="restart-button">Restart Game</button>
+        <button class="start-button">Start Game</button>
       </div>
     </div>
     <script src="script.js"></script>

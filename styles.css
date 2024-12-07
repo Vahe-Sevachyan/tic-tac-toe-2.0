@@ -64,7 +64,7 @@ h1 {
 .restart-button {
   padding: 10px 20px;
   font-size: 16px;
-  background-color: #4c77af;
+  background-color: dodgerblue;
   color: white;
   border: none;
   border-radius: 5px;
@@ -74,4 +74,37 @@ h1 {
 
 .restart-button:hover {
   background-color: #c74509;
+}
+.difficulty-container {
+  display: flex;
+  justify-content: space-around;
+}
+button {
+  padding: 8px;
+  /* background-color: dodgerblue; */
+  border: none;
+  /* color: #fff; */
+  border-radius: 5px;
+}
+button:hover {
+  background-color: rgb(24, 72, 119);
+}
+.difficulty-container {
+  margin-bottom: 5px;
+}
+.timer {
+  margin-top: 10px;
+}
+#timer {
+  font-size: 25px;
+  font-weight: bold;
+  text-align: center;
+  margin-top: 20px;
+  color: #4caf50; /* Green color */
+  border: 2px solid #4caf50;
+  border-radius: 8px;
+  display: inline-block;
+  padding: 15px 25px;
+  background-color: #f9f9f9; /* Light background */
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
 }

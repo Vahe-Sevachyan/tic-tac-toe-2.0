@@ -1,22 +1,50 @@
 const cells = document.querySelectorAll(".cell");
-const restartButton = document.querySelector(".restart-button");
-const statusText = document.querySelector(".status-text");
+const startButton = document.querySelector(".start-button");
+const difficultyLevelEasy = document.querySelector(".easy");
+const difficultyLevelMedium = document.querySelector(".medium");
+const difficultyLevelHard = document.querySelector(".hard");
+const timerElement = document.getElementById("timer");
+const gameOverText = document.querySelector(".gameOverText");
+const statusText = (document.querySelector(".status-text").style.color =
+  "dodgerBlue");
+let countdown = 10;
+let turn = "X";
+let winner = null;
+let gameModeChosen = null;
+let gameModeLevels = ["easy", "medium", "hard"];
+startButton.disabled = true;
 const gameBoard = {
   row1: ["", "", ""],
   row2: ["", "", ""],
   row3: ["", "", ""],
 };
-let turn = "X";
 
-const playerOne = {
+const playerX = {
   player: "X",
+  pick: "",
 };
 
-restartButton.addEventListener("click", () => {
+const playerO = {
+  player: "O",
+  pick: "",
+};
+// if ((startButton.disabled = true)) {
+//   startButton.style.backgroundColor = "grey";
+// }
+//checks if gameMode is chosen before enabling the start button
+// gameModeChosen = "easy";
+if (gameModeChosen === "easy") {
+  startButton.disabled = false;
+  startButton.style.backgroundColor = "dodgerBlue";
+}
+startButton.addEventListener("click", () => {
+  if ((startButton.disabled = false && gameModeChosen === "easy")) {
+  }
   restartGame();
   console.log("clicked");
   console.log(gameBoard);
 });
+function selectedGameMode() {}
 function restartGame() {
   Object.keys(gameBoard).forEach((key) => {
     gameBoard[key] = new Array(gameBoard[key].length).fill("");
@@ -25,6 +53,7 @@ function restartGame() {
     });
   });
 }
+
 //add a timer with different difficulty levels
 cells.forEach((cell, index) => {
   cell.addEventListener("click", (e) => {
@@ -46,6 +75,49 @@ cells.forEach((cell, index) => {
     }
   });
 });
+
+difficultyLevelEasy.addEventListener("click", () => {
+  // Update the timer every second
+  startButton.disabled = false;
+  startButton.style.backgroundColor = "dodgerBlue";
+  const intervalX = setInterval(() => {
+    countdown--;
+    timerElement.textContent = countdown;
+    //you have to call the reset timer function after each selection
+    if (countdown === 0 && playerX.pick === "") {
+      clearInterval(intervalX); // Stop the timer
+      timerElement.textContent = "Time's up!";
+      console.log("player x didnt pick anything");
+      // triggerFunction(); // Call the function after 10 seconds
+      // startTimer();
+    } else if (countdown === 0 && playerX.pick === true) {
+      //restart the timer
+      const intervalO = setInterval(() => {
+        countdown--;
+        timerElement.textContent = countdown;
+
+        if (countdown === 0 && playerO.pick === "") {
+          clearInterval(intervalO); // Stop the timer
+          timerElement.textContent = "Time's up!";
+          console.log("player o didnt pick anything");
+        } else if (countdown === 0 && playerO.pick === true) {
+          const intervalX = setInterval(() => {
+            countdown--;
+            timerElement.textContent = countdown;
+
+            if (countdown === 0) {
+              clearInterval(intervalX); // Stop the timer
+              timerElement.textContent = "Time's up!";
+            }
+          }, 1000);
+        }
+      }, 1000);
+    }
+  }, 1000);
+});
+function triggerFunction() {
+  gameOverText.innerHTML = `Game is Over ${turn} missed his turn.`;
+}
 function winnerCheck() {
   winnerCheckHorizontalX();
   winnerCheckHorizontalO();
