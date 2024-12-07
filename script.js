@@ -10,7 +10,7 @@ const statusText = (document.querySelector(".status-text").style.color =
 let countdown = 10;
 let turn = "X";
 let winner = null;
-let gameModeChosen = null;
+let gameModeChosen = "";
 let gameModeLevels = ["easy", "medium", "hard"];
 startButton.disabled = true;
 const gameBoard = {
@@ -18,7 +18,8 @@ const gameBoard = {
   row2: ["", "", ""],
   row3: ["", "", ""],
 };
-
+// when start game is selected a timer goes off saying player x your turn is up in ${seconds} seconds
+//once the timer expires enable the game board to alow selecting
 const playerX = {
   player: "X",
   pick: "",
@@ -33,18 +34,34 @@ const playerO = {
 // }
 //checks if gameMode is chosen before enabling the start button
 // gameModeChosen = "easy";
-if (gameModeChosen === "easy") {
-  startButton.disabled = false;
-  startButton.style.backgroundColor = "dodgerBlue";
-}
+// if (gameModeChosen === "easy") {
+//   startButton.disabled = false;
+//   startButton.style.backgroundColor = "dodgerBlue";
+// }
+// startButton.addEventListener("click", () => {
+//   if ((startButton.disabled = false && gameModeChosen === "easy")) {
+//     intervalX();
+//   }
+// });
 startButton.addEventListener("click", () => {
-  if ((startButton.disabled = false && gameModeChosen === "easy")) {
+  // intervalX();
+  if (startButton.disabled === false && gameModeChosen === "easy") {
+    intervalX();
+    console.log(gameModeChosen);
+    console.log("clicked");
   }
-  restartGame();
-  console.log("clicked");
-  console.log(gameBoard);
 });
-function selectedGameMode() {}
+
+difficultyLevelEasy.addEventListener("click", () => {
+  // Update the timer every second
+  gameModeChosen = "easy";
+  console.log(gameModeChosen);
+  // intervalX();
+  startButton.disabled = false;
+  console.log(startButton.disabled);
+  startButton.style.backgroundColor = "dodgerBlue";
+});
+// function selectedGameMode() {}
 function restartGame() {
   Object.keys(gameBoard).forEach((key) => {
     gameBoard[key] = new Array(gameBoard[key].length).fill("");
@@ -75,12 +92,8 @@ cells.forEach((cell, index) => {
     }
   });
 });
-
-difficultyLevelEasy.addEventListener("click", () => {
-  // Update the timer every second
-  startButton.disabled = false;
-  startButton.style.backgroundColor = "dodgerBlue";
-  const intervalX = setInterval(() => {
+function intervalX() {
+  intervalX = setInterval(() => {
     countdown--;
     timerElement.textContent = countdown;
     //you have to call the reset timer function after each selection
@@ -114,7 +127,8 @@ difficultyLevelEasy.addEventListener("click", () => {
       }, 1000);
     }
   }, 1000);
-});
+}
+
 function triggerFunction() {
   gameOverText.innerHTML = `Game is Over ${turn} missed his turn.`;
 }
