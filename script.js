@@ -23,23 +23,21 @@ cells.forEach((cell, index) => {
       e.target.innerText = "X";
       turn = "O";
       cellsCheck(cell, index);
-      winnerCheckHorizontalX();
-      winnerCheckHorizontalO();
-      winnerCheckVerticalX();
-      // console.log(e.target);
+      winnerCheck();
     } else if (e.target.innerText === "" && turn === "O") {
       e.target.innerText = "O";
       turn = "X";
       cellsCheck(cell, index);
-      winnerCheckHorizontalX();
-      winnerCheckHorizontalO();
-      winnerCheckVerticalX();
-      console.log(Object.entries(gameBoard));
-      // winnerCheck();
+      winnerCheck();
     }
   });
 });
-
+function winnerCheck() {
+  winnerCheckHorizontalX();
+  winnerCheckHorizontalO();
+  winnerCheckVerticalX();
+  winnerCheckVerticalO();
+}
 function restartGame() {
   Object.entries(gameBoard).forEach(([key, array]) => {
     gameBoard[key] = array.map(() => ""); // Replace each value with an empty string
@@ -88,21 +86,7 @@ function cellsCheck(selectedCell, index) {
     console.log(gameBoard.row3[2]);
   }
 }
-//checks which cell to assign value to in gameBoard object
-function cellCheck(selectedCell, index) {
-  if (index === 0 || index === 1 || index === 2) {
-    gameBoard.row1.push(selectedCell.innerHTML);
-    // console.log(gameBoard);
-  } else if (index === 3 || index === 4 || index === 5) {
-    gameBoard.row2.push(selectedCell.innerHTML);
-    // console.log(gameBoard);
-  } else if (index === 6 || index === 7 || index === 8) {
-    gameBoard.row3.push(selectedCell.innerHTML);
-    // console.log(gameBoard);
-  }
-}
-//rewrite the cell check function to check for the cell  then push it to correct location in the board
-// you will have to write a function for each one think of a creative way to group your code
+
 function winnerCheckHorizontalX() {
   if (
     gameBoard.row1[0] === "X" &&
@@ -167,3 +151,37 @@ function winnerCheckVerticalX() {
     console.log("X wins vertically third row");
   }
 }
+function winnerCheckVerticalO() {
+  if (
+    gameBoard.row1[0] === "O" &&
+    gameBoard.row2[0] === "O" &&
+    gameBoard.row3[0] === "O"
+  ) {
+    console.log("the code reached vertical x");
+    console.log("O wins vertically first row");
+  } else if (
+    gameBoard.row1[1] === "O" &&
+    gameBoard.row2[1] === "O" &&
+    gameBoard.row3[1] === "O"
+  ) {
+    console.log("O wins vertically second row");
+  } else if (
+    gameBoard.row1[2] === "O" &&
+    gameBoard.row2[2] === "O" &&
+    gameBoard.row3[2] === "O"
+  ) {
+    console.log("X wins vertically third row");
+  }
+}
+// function cellCheck(selectedCell, index) {
+//   if (index === 0 || index === 1 || index === 2) {
+//     gameBoard.row1.push(selectedCell.innerHTML);
+//     // console.log(gameBoard);
+//   } else if (index === 3 || index === 4 || index === 5) {
+//     gameBoard.row2.push(selectedCell.innerHTML);
+//     // console.log(gameBoard);
+//   } else if (index === 6 || index === 7 || index === 8) {
+//     gameBoard.row3.push(selectedCell.innerHTML);
+//     // console.log(gameBoard);
+//   }
+// }
