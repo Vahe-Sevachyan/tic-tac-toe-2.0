@@ -1,9 +1,9 @@
 const cells = document.querySelectorAll(".cell");
 const restartButton = document.querySelector(".restart-button");
 const gameBoard = {
-  row1: [],
-  row2: [],
-  row3: [],
+  row1: ["", "", ""],
+  row2: ["", "", ""],
+  row3: ["", "", ""],
 };
 let turn = "X";
 
@@ -14,8 +14,14 @@ const playerOne = {
 restartButton.addEventListener("click", () => {
   restartGame();
   console.log("clicked");
+  console.log(gameBoard);
 });
-
+function restartGame() {
+  Object.keys(gameBoard).forEach((key) => {
+    // Fill each array with empty strings (same length as before)
+    gameBoard[key] = new Array(gameBoard[key].length).fill("");
+  });
+}
 cells.forEach((cell, index) => {
   cell.addEventListener("click", (e) => {
     // check if the cell is empty then assign a value to it
@@ -39,11 +45,6 @@ function winnerCheck() {
   winnerCheckVerticalO();
   krisCrossX();
 }
-function restartGame() {
-  Object.entries(gameBoard).forEach(([key, array]) => {
-    gameBoard[key] = array.map(() => ""); // Replace each value with an empty string
-  });
-}
 
 function cellsCheck(selectedCell, index) {
   //first row
@@ -51,19 +52,23 @@ function cellsCheck(selectedCell, index) {
     gameBoard.row1[0] = selectedCell.innerHTML;
     console.log(Object.entries(gameBoard));
     console.log(gameBoard.row1[0]);
+    console.log(gameBoard);
   } else if (index === 1) {
     gameBoard.row1[1] = selectedCell.innerHTML;
     console.log(Object.entries(gameBoard));
     console.log(gameBoard.row1[1]);
+    console.log(gameBoard);
   } else if (index === 2) {
     gameBoard.row1[2] = selectedCell.innerHTML;
     console.log(Object.entries(gameBoard));
     console.log(gameBoard.row1[2]);
+    console.log(gameBoard);
     //second row
   } else if (index === 3) {
     gameBoard.row2[0] = selectedCell.innerHTML;
     console.log(Object.entries(gameBoard));
     console.log(gameBoard.row2[0]);
+    console.log(gameBoard);
   } else if (index === 4) {
     gameBoard.row2[1] = selectedCell.innerHTML;
     console.log(Object.entries(gameBoard));
