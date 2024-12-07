@@ -1,5 +1,6 @@
 const cells = document.querySelectorAll(".cell");
 const restartButton = document.querySelector(".restart-button");
+const statusText = document.querySelector(".status-text");
 const gameBoard = {
   row1: ["", "", ""],
   row2: ["", "", ""],
@@ -18,23 +19,27 @@ restartButton.addEventListener("click", () => {
 });
 function restartGame() {
   Object.keys(gameBoard).forEach((key) => {
-    // Fill each array with empty strings (same length as before)
     gameBoard[key] = new Array(gameBoard[key].length).fill("");
     cells.forEach((cell) => {
       cell.innerHTML = "";
     });
   });
 }
+//add a timer with different difficulty levels
 cells.forEach((cell, index) => {
   cell.addEventListener("click", (e) => {
     // check if the cell is empty then assign a value to it
     if (e.target.innerText === "" && turn === "X") {
       e.target.innerText = "X";
+      e.target.style.color = "dodgerBlue";
+      statusText.style.color = "dodgerBlue";
       turn = "O";
       cellsCheck(cell, index);
       winnerCheck();
     } else if (e.target.innerText === "" && turn === "O") {
       e.target.innerText = "O";
+      e.target.style.color = "green";
+      statusText.style.color = "green";
       turn = "X";
       cellsCheck(cell, index);
       winnerCheck();
