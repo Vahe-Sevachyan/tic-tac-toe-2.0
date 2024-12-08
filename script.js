@@ -5,14 +5,18 @@ const difficultyLevelMedium = document.querySelector(".medium");
 const difficultyLevelHard = document.querySelector(".hard");
 const timerElement = document.getElementById("timer");
 const gameOverText = document.querySelector(".gameOverText");
-const statusText = (document.querySelector(".status-text").style.color =
-  "dodgerBlue");
+const statusText = document.querySelector(".status-text");
 let countdown = 10;
 let turn = "X";
 let winner = null;
 let gameModeChosen = "";
 let gameModeLevels = ["easy", "medium", "hard"];
 startButton.disabled = true;
+
+const easyModeTimer = {
+  gameTime: 10,
+  interval: null,
+};
 const gameBoard = {
   row1: ["", "", ""],
   row2: ["", "", ""],
@@ -43,23 +47,24 @@ const playerO = {
 //     intervalX();
 //   }
 // });
-startButton.addEventListener("click", () => {
-  // intervalX();
-  if (startButton.disabled === false && gameModeChosen === "easy") {
-    intervalX();
-    console.log(gameModeChosen);
-    console.log("clicked");
-  }
-});
 
+//#!1 step one the gameMode
 difficultyLevelEasy.addEventListener("click", () => {
   // Update the timer every second
   gameModeChosen = "easy";
-  console.log(gameModeChosen);
+  // console.log(gameModeChosen);
   // intervalX();
   startButton.disabled = false;
-  console.log(startButton.disabled);
+  // console.log(startButton.disabled);
   startButton.style.backgroundColor = "dodgerBlue";
+});
+startButton.addEventListener("click", () => {
+  // intervalX();
+  if (startButton.disabled === false && gameModeChosen === "easy") {
+    interval_X_Timer();
+    // console.log(gameModeChosen);
+    // console.log("clicked");
+  }
 });
 // function selectedGameMode() {}
 function restartGame() {
@@ -82,18 +87,24 @@ cells.forEach((cell, index) => {
       turn = "O";
       cellsCheck(cell, index);
       winnerCheck();
+      playerX.pick = e.target.innerText;
+      // interval_O_Timer();
     } else if (e.target.innerText === "" && turn === "O") {
+      playerX.pick = "";
       e.target.innerText = "O";
+      turn = "X";
+      playerO.pick = e.target.innerText;
       e.target.style.color = "green";
       statusText.style.color = "green";
-      turn = "X";
       cellsCheck(cell, index);
       winnerCheck();
+      // interval_X_Timer();
     }
   });
 });
-function intervalX() {
-  intervalX = setInterval(() => {
+
+function interval_X_Timer() {
+  const intervalX = setInterval(() => {
     countdown--;
     timerElement.textContent = countdown;
     //you have to call the reset timer function after each selection
@@ -103,28 +114,37 @@ function intervalX() {
       console.log("player x didnt pick anything");
       // triggerFunction(); // Call the function after 10 seconds
       // startTimer();
-    } else if (countdown === 0 && playerX.pick === true) {
+    } else if (playerX.pick === "X") {
       //restart the timer
-      const intervalO = setInterval(() => {
-        countdown--;
-        timerElement.textContent = countdown;
+      countdown = 11;
+      interval_O_Timer();
+      clearInterval(intervalX);
+      turn = "O";
+      playerX.pick = "";
+      // return;
+      // clearInterval(intervalX);
+      console.log("player x picked something");
+    }
+  }, 1000);
+}
 
-        if (countdown === 0 && playerO.pick === "") {
-          clearInterval(intervalO); // Stop the timer
-          timerElement.textContent = "Time's up!";
-          console.log("player o didnt pick anything");
-        } else if (countdown === 0 && playerO.pick === true) {
-          const intervalX = setInterval(() => {
-            countdown--;
-            timerElement.textContent = countdown;
-
-            if (countdown === 0) {
-              clearInterval(intervalX); // Stop the timer
-              timerElement.textContent = "Time's up!";
-            }
-          }, 1000);
-        }
-      }, 1000);
+// function intervalX() {}
+function interval_O_Timer() {
+  const intervalO = setInterval(() => {
+    countdown--;
+    timerElement.textContent = countdown;
+    if (countdown === 0 && playerO.pick === "") {
+      clearInterval(intervalO); // Stop the timer
+      timerElement.textContent = "Time's up!";
+      console.log("player o didn't pick anything");
+    } else if (playerO.pick === "O") {
+      countdown = 11;
+      turn = "X";
+      interval_X_Timer();
+      playerO.pick = "";
+      clearInterval(intervalO);
+      console.log("player 'O' picked something");
+      // return;
     }
   }, 1000);
 }
