@@ -46,13 +46,13 @@ h1 {
   border-radius: 5px;
   transition: background-color 0.3s ease;
   pointer-events: none;
+  opacity: 0.3;
 }
 .enabledBoard {
   pointer-events: auto;
 }
 .disabled {
   opacity: 0.5; /* Adjust opacity as needed */
-
   pointer-events: none;
 }
 .cell:hover {

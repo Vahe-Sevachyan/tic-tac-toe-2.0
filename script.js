@@ -11,8 +11,10 @@ let countdown = 10;
 let turn = "X";
 let winner = null;
 let gameModeChosen = "";
-// let gameModeLevels = ["easy", "medium", "hard"];
 startButton.disabled = true;
+timerElement.style.display = "none";
+// let gameModeLevels = ["easy", "medium", "hard"];
+timerElement.style.display = "none";
 // cells.style.pointerEvents = "none";
 
 // cells.classList.add("disabled");
@@ -55,26 +57,20 @@ const playerO = {
 //#!1 step one the gameMode
 difficultyLevelEasyBtn.addEventListener("click", () => {
   // Update the timer every second
-  // rowActive.classList.add("disabled");
-
+  timerElement.style.display = "inline-block";
   gameModeChosen = "easy";
-  // cells.classList.add("enabledBoard");
-  // console.log(gameModeChosen);
-  // intervalX();
   startButton.disabled = false;
-  // console.log(startButton.disabled);
   startButton.style.backgroundColor = "dodgerBlue";
 });
 
 startButton.addEventListener("click", () => {
-  // intervalX();
   if (startButton.disabled === false && gameModeChosen === "easy") {
+    //changes the pointer event value in css to activate the board and allow selection
     cells.forEach((cell) => {
       cell.style.pointerEvents = "auto";
+      cell.style.opacity = 1;
     });
     interval_X_Timer();
-    // console.log(gameModeChosen);
-    // console.log("clicked");
   }
 });
 // function selectedGameMode() {}
