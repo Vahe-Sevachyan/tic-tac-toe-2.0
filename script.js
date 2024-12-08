@@ -1,6 +1,7 @@
 const cells = document.querySelectorAll(".cell");
+const rowActive = document.querySelectorAll(".row");
 const startButton = document.querySelector(".start-button");
-const difficultyLevelEasy = document.querySelector(".easy");
+const difficultyLevelEasyBtn = document.querySelector(".easy");
 const difficultyLevelMedium = document.querySelector(".medium");
 const difficultyLevelHard = document.querySelector(".hard");
 const timerElement = document.getElementById("timer");
@@ -10,9 +11,12 @@ let countdown = 10;
 let turn = "X";
 let winner = null;
 let gameModeChosen = "";
-let gameModeLevels = ["easy", "medium", "hard"];
+// let gameModeLevels = ["easy", "medium", "hard"];
 startButton.disabled = true;
+// cells.style.pointerEvents = "none";
 
+// cells.classList.add("disabled");
+// rowActive.style.pointerEvents = "none";
 const easyModeTimer = {
   gameTime: 10,
   interval: null,
@@ -22,6 +26,7 @@ const gameBoard = {
   row2: ["", "", ""],
   row3: ["", "", ""],
 };
+
 // when start game is selected a timer goes off saying player x your turn is up in ${seconds} seconds
 //once the timer expires enable the game board to alow selecting
 const playerX = {
@@ -47,20 +52,26 @@ const playerO = {
 //     intervalX();
 //   }
 // });
-
 //#!1 step one the gameMode
-difficultyLevelEasy.addEventListener("click", () => {
+difficultyLevelEasyBtn.addEventListener("click", () => {
   // Update the timer every second
+  // rowActive.classList.add("disabled");
+
   gameModeChosen = "easy";
+  // cells.classList.add("enabledBoard");
   // console.log(gameModeChosen);
   // intervalX();
   startButton.disabled = false;
   // console.log(startButton.disabled);
   startButton.style.backgroundColor = "dodgerBlue";
 });
+
 startButton.addEventListener("click", () => {
   // intervalX();
   if (startButton.disabled === false && gameModeChosen === "easy") {
+    cells.forEach((cell) => {
+      cell.style.pointerEvents = "auto";
+    });
     interval_X_Timer();
     // console.log(gameModeChosen);
     // console.log("clicked");
