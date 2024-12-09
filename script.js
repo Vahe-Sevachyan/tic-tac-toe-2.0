@@ -11,6 +11,8 @@ let countdown = 10;
 let turn = "X";
 let winner = null;
 let gameModeChosen = "";
+let intervalX;
+let intervalO;
 startButton.disabled = true;
 timerElement.style.display = "none";
 // let gameModeLevels = ["easy", "medium", "hard"];
@@ -112,7 +114,7 @@ cells.forEach((cell, index) => {
 });
 
 function interval_X_Timer() {
-  const intervalX = setInterval(() => {
+  intervalX = setInterval(() => {
     countdown--;
     timerElement.textContent = countdown;
     if (countdown === 0 && playerX.pick === "") {
@@ -131,7 +133,7 @@ function interval_X_Timer() {
 }
 
 function interval_O_Timer() {
-  const intervalO = setInterval(() => {
+  intervalO = setInterval(() => {
     countdown--;
     timerElement.textContent = countdown;
     if (countdown === 0 && playerO.pick === "") {
@@ -213,7 +215,9 @@ function winnerCheckHorizontalX() {
     gameBoard.row1[1] === "X" &&
     gameBoard.row1[2] === "X"
   ) {
-    console.log("X is the Horizontal Winner Row 1");
+    // console.log("X is the Horizontal Winner Row 1");
+    clearInterval(intervalX); // Stop the timer
+    timerElement.textContent = "X is the Horizontal Winner Row 1";
   } else if (
     gameBoard.row2[0] === "X" &&
     gameBoard.row2[1] === "X" &&
