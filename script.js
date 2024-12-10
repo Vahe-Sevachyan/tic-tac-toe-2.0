@@ -65,6 +65,8 @@ difficultyLevelEasyBtn.addEventListener("click", () => {
   // Update the timer every second
   timerElement.style.display = "inline-block";
   timerElement.style.opacity = 0.3;
+  timerElement.innerHTML = "10";
+  statusText.style.display = "block";
   gameModeChosen = "easy";
   startButton.disabled = false;
   startButton.style.backgroundColor = "dodgerBlue";
@@ -95,6 +97,8 @@ restartButton.addEventListener("click", () => {
   timerElement.innerHTML = "";
   timerElement.style.display = "none";
   statusText.style.display = "none";
+  startButton.disabled = true;
+  startButton.style.backgroundColor = "grey";
   // cells.style.pointerEvents = "none";
   cells.forEach((cell) => {
     //activate gameBoard

@@ -83,6 +83,7 @@ h1 {
 .restart-button:hover {
   background-color: #c74509;
 }
+
 .difficulty-container {
   display: flex;
   justify-content: space-around;
