@@ -65,6 +65,7 @@ difficultyLevelEasyBtn.addEventListener("click", () => {
   // Update the timer every second
   timerElement.style.display = "inline-block";
   timerElement.style.opacity = 0.3;
+  turn = "X";
   timerElement.innerHTML = "10";
   statusText.style.display = "block";
   gameModeChosen = "easy";
@@ -77,6 +78,7 @@ startButton.addEventListener("click", () => {
   if (startButton.disabled === false && gameModeChosen === "easy") {
     //changes the pointer event value in css to activate the board and allow selection
     timerElement.style.opacity = 1;
+
     cells.forEach((cell) => {
       //activate gameBoard
       cell.style.pointerEvents = "auto";
@@ -87,38 +89,50 @@ startButton.addEventListener("click", () => {
 });
 
 restartButton.addEventListener("click", () => {
+  //clears all cell blocks in gamBoard object
   Object.keys(gameBoard).forEach((key) => {
     gameBoard[key] = new Array(gameBoard[key].length).fill("");
     cells.forEach((cell) => {
       cell.innerHTML = "";
     });
   });
+  clearInterval(intervalX);
+  clearInterval(intervalO);
   gameModeChosen = "";
   timerElement.innerHTML = "";
   timerElement.style.display = "none";
   statusText.style.display = "none";
   startButton.disabled = true;
   startButton.style.backgroundColor = "grey";
+
   // cells.style.pointerEvents = "none";
   cells.forEach((cell) => {
-    //activate gameBoard
+    //deactivate gameBoard
     cell.style.pointerEvents = "none";
     cell.style.opacity = 0.3;
   });
-  clearInterval(intervalX);
-  clearInterval(intervalO);
 });
 
-// function selectedGameMode() {}
-function restartGame() {
-  //this works don't touch it
-  Object.keys(gameBoard).forEach((key) => {
-    gameBoard[key] = new Array(gameBoard[key].length).fill("");
-    cells.forEach((cell) => {
-      cell.innerHTML = "";
-    });
+function clearGameBoard() {
+  cells.forEach((cell) => {
+    //deactivate gameBoard
+    cell.style.pointerEvents = "none";
+    cell.style.opacity = 0.8;
   });
+  clearInterval(intervalX);
+  clearInterval(intervalO);
+  statusText.innerHTML = "works";
 }
+// // function selectedGameMode() {}
+// function restartGame() {
+//   //this works don't touch itl
+//   Object.keys(gameBoard).forEach((key) => {
+//     gameBoard[key] = new Array(gameBoard[key].length).fill("");
+//     cells.forEach((cell) => {
+//       cell.innerHTML = "";
+//     });
+//   });
+// }
 
 //add a timer with different difficulty levels
 cells.forEach((cell, index) => {
@@ -194,6 +208,7 @@ function winnerCheck() {
   winnerCheckVerticalX();
   winnerCheckVerticalO();
   krisCrossX();
+  krisCrossO();
 }
 
 function cellsCheck(selectedCell, index) {
@@ -251,6 +266,7 @@ function winnerCheckHorizontalX() {
   ) {
     // console.log("X is the Horizontal Winner Row 1");
     clearInterval(intervalX); // Stop the timer
+    lockBoard();
     timerElement.textContent = "X is the Horizontal Winner Row 1";
     statusText.innerHTML = "";
   } else if (
@@ -298,6 +314,7 @@ function winnerCheckHorizontalO() {
     statusText.innerHTML = "";
   }
 }
+
 function winnerCheckVerticalX() {
   if (
     gameBoard.row1[0] === "X" &&
@@ -366,19 +383,25 @@ function krisCrossX() {
     gameBoard.row2[1] === "X" &&
     gameBoard.row3[0] === "X"
   ) {
-    clearInterval(intervalX); // Stop the timer
+    // clearInterval(intervalX); // Stop the timer
     timerElement.textContent = "X Wins krisCross";
-    statusText.innerHTML = "";
+    // statusText.innerHTML = "";
+    clearGameBoard();
+    // cells.forEach((cell) => {
+    //   //deactivate gameBoard
+    //   cell.style.pointerEvents = "none";
+    //   cell.style.opacity = 0.8;
+    // });
   }
 }
 
-function krisCrossX() {
+function krisCrossO() {
   if (
     gameBoard.row1[0] === "O" &&
     gameBoard.row2[1] === "O" &&
     gameBoard.row3[2] === "O"
   ) {
-    clearInterval(intervalX); // Stop the timer
+    clearInterval(intervalO); // Stop the timer
     timerElement.textContent = "O wins krisCross";
     statusText.innerHTML = "";
   } else if (
@@ -386,8 +409,9 @@ function krisCrossX() {
     gameBoard.row2[1] === "O" &&
     gameBoard.row3[0] === "O"
   ) {
-    clearInterval(intervalX); // Stop the timer
+    // clearInterval(intervalO); // Stop the timer
+    //  statusText.innerHTML = "";
     timerElement.textContent = "O wins krisCross";
-    statusText.innerHTML = "";
+    clearGameBoard();
   }
 }
