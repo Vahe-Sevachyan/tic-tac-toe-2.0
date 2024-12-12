@@ -207,8 +207,8 @@ function cellsCheck(selectedCell, index) {
     gameBoard.row3[2] = selectedCell.innerHTML;
   }
 }
-function displayWinnerX(displayText) {
-  clearInterval(intervalX); // Stop the timer
+function displayWinner(displayText) {
+  clearInterval(intervalX, intervalO); // Stop the timer
   clearGameBoard();
   timerElement.textContent = displayText;
   statusText.innerHTML = "";
@@ -220,19 +220,19 @@ function winnerCheckHorizontalX() {
     gameBoard.row1[1] === "X" &&
     gameBoard.row1[2] === "X"
   ) {
-    displayWinnerX("X is the Horizontal Winner Row 1");
+    displayWinner("X is the Horizontal Winner Row 1");
   } else if (
     gameBoard.row2[0] === "X" &&
     gameBoard.row2[1] === "X" &&
     gameBoard.row2[2] === "X"
   ) {
-    displayWinnerX("X is the Horizontal Winner Row 2");
+    displayWinner("X is the Horizontal Winner Row 2");
   } else if (
     gameBoard.row3[0] === "X" &&
     gameBoard.row3[1] === "X" &&
     gameBoard.row3[2] === "X"
   ) {
-    displayWinnerX("X is the Horizontal Winner Row 3");
+    displayWinner("X is the Horizontal Winner Row 3");
   }
 }
 function winnerCheckHorizontalO() {
@@ -241,25 +241,19 @@ function winnerCheckHorizontalO() {
     gameBoard.row1[1] === "O" &&
     gameBoard.row1[2] === "O"
   ) {
-    clearInterval(intervalO); // Stop the timer
-    timerElement.textContent = "O is the Horizontal Winner Row 1";
-    statusText.innerHTML = "";
+    displayWinner("O is the Horizontal Winner Row 1");
   } else if (
     gameBoard.row2[0] === "O" &&
     gameBoard.row2[1] === "O" &&
     gameBoard.row2[2] === "O"
   ) {
-    clearInterval(intervalO); // Stop the timer
-    timerElement.textContent = "O is the Horizontal Winner Row 2";
-    statusText.innerHTML = "";
+    displayWinner("O is the Horizontal Winner Row 2");
   } else if (
     gameBoard.row3[0] === "O" &&
     gameBoard.row3[1] === "O" &&
     gameBoard.row3[2] === "O"
   ) {
-    clearInterval(intervalO); // Stop the timer
-    timerElement.textContent = "O is the Horizontal Winner Row 3";
-    statusText.innerHTML = "";
+    displayWinner("O is the Horizontal Winner Row 3");
   }
 }
 
@@ -269,25 +263,19 @@ function winnerCheckVerticalX() {
     gameBoard.row2[0] === "X" &&
     gameBoard.row3[0] === "X"
   ) {
-    clearInterval(intervalX); // Stop the timer
-    timerElement.textContent = "X wins vertically first row";
-    statusText.innerHTML = "";
+    displayWinner("X is the Vertical winner Row 1");
   } else if (
     gameBoard.row1[1] === "X" &&
     gameBoard.row2[1] === "X" &&
     gameBoard.row3[1] === "X"
   ) {
-    clearInterval(intervalX); // Stop the timer
-    timerElement.textContent = "X wins vertically second row";
-    statusText.innerHTML = "";
+    displayWinner("X is the Vertical winner Row 2");
   } else if (
     gameBoard.row1[2] === "X" &&
     gameBoard.row2[2] === "X" &&
     gameBoard.row3[2] === "X"
   ) {
-    clearInterval(intervalX); // Stop the timer
-    timerElement.textContent = "X wins vertically third row";
-    statusText.innerHTML = "";
+    displayWinner("X is the Vertical winner Row 3");
   }
 }
 function winnerCheckVerticalO() {
@@ -296,27 +284,22 @@ function winnerCheckVerticalO() {
     gameBoard.row2[0] === "O" &&
     gameBoard.row3[0] === "O"
   ) {
-    clearInterval(intervalO); // Stop the timer
-    timerElement.textContent = "O wins vertically first row";
-    statusText.innerHTML = "";
+    displayWinner("O is the Vertical winner Row 1");
   } else if (
     gameBoard.row1[1] === "O" &&
     gameBoard.row2[1] === "O" &&
     gameBoard.row3[1] === "O"
   ) {
-    clearInterval(intervalO); // Stop the timer
-    timerElement.textContent = "O wins vertically first row";
-    statusText.innerHTML = "";
+    displayWinner("O is the Vertical winner Row 2");
   } else if (
     gameBoard.row1[2] === "O" &&
     gameBoard.row2[2] === "O" &&
     gameBoard.row3[2] === "O"
   ) {
-    clearInterval(intervalO); // Stop the timer
-    timerElement.textContent = "X wins vertically third row";
-    statusText.innerHTML = "";
+    displayWinner("O is the Vertical winner Row 3");
   }
 }
+
 function krisCrossX() {
   if (
     gameBoard.row1[0] === "X" &&
@@ -324,17 +307,16 @@ function krisCrossX() {
     gameBoard.row3[2] === "X"
   ) {
     clearInterval(intervalX); // Stop the timer
-    timerElement.textContent = "X wins krisCross";
+    timerElement.textContent = "";
     statusText.innerHTML = "";
+    displayWinner("X wins krisCross");
   } else if (
     gameBoard.row1[2] === "X" &&
     gameBoard.row2[1] === "X" &&
     gameBoard.row3[0] === "X"
   ) {
     // clearInterval(intervalX); // Stop the timer
-    clearInterval(intervalX); // Stop the timer
-    timerElement.textContent = "X wins krisCross";
-    statusText.innerHTML = "";
+    displayWinner("X wins krisCross");
   }
 }
 
@@ -344,17 +326,12 @@ function krisCrossO() {
     gameBoard.row2[1] === "O" &&
     gameBoard.row3[2] === "O"
   ) {
-    clearInterval(intervalO); // Stop the timer
-    timerElement.textContent = "O wins krisCross";
-    statusText.innerHTML = "";
+    displayWinner("O wins krisCross");
   } else if (
     gameBoard.row1[2] === "O" &&
     gameBoard.row2[1] === "O" &&
     gameBoard.row3[0] === "O"
   ) {
-    // clearInterval(intervalO); // Stop the timer
-    //  statusText.innerHTML = "";
-    timerElement.textContent = "O wins krisCross";
-    clearGameBoard();
+    displayWinner("O wins krisCross");
   }
 }
