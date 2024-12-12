@@ -16,12 +16,7 @@ let intervalX;
 let intervalO;
 startButton.disabled = true;
 timerElement.style.display = "none";
-// let gameModeLevels = ["easy", "medium", "hard"];
-timerElement.style.display = "none";
-// cells.style.pointerEvents = "none";
 
-// cells.classList.add("disabled");
-// rowActive.style.pointerEvents = "none";
 const easyModeTimer = {
   gameTime: 10,
   interval: null,
@@ -46,21 +41,7 @@ const playerO = {
   pick: "",
 };
 
-// if ((startButton.disabled = true)) {
-//   startButton.style.backgroundColor = "grey";
-// }
-//checks if gameMode is chosen before enabling the start button
-// gameModeChosen = "easy";
-// if (gameModeChosen === "easy") {
-//   startButton.disabled = false;
-//   startButton.style.backgroundColor = "dodgerBlue";
-// }
-// startButton.addEventListener("click", () => {
-//   if ((startButton.disabled = false && gameModeChosen === "easy")) {
-//     intervalX();
-//   }
-// });
-//#!1 step one the gameModes
+//#1 chose difficulty level
 difficultyLevelEasyBtn.addEventListener("click", () => {
   // Update the timer every second
   timerElement.style.display = "inline-block";
@@ -74,6 +55,7 @@ difficultyLevelEasyBtn.addEventListener("click", () => {
   statusText.style.color = "dodgerBlue";
 });
 
+//starts the game and the timer clock
 startButton.addEventListener("click", () => {
   if (startButton.disabled === false && gameModeChosen === "easy") {
     //changes the pointer event value in css to activate the board and allow selection
@@ -88,6 +70,7 @@ startButton.addEventListener("click", () => {
   }
 });
 
+//restart the game an resets the game board
 restartButton.addEventListener("click", () => {
   //clears all cell blocks in gamBoard object
   Object.keys(gameBoard).forEach((key) => {
@@ -104,7 +87,6 @@ restartButton.addEventListener("click", () => {
   statusText.style.display = "none";
   startButton.disabled = true;
   startButton.style.backgroundColor = "grey";
-
   // cells.style.pointerEvents = "none";
   cells.forEach((cell) => {
     //deactivate gameBoard
@@ -123,18 +105,8 @@ function clearGameBoard() {
   clearInterval(intervalO);
   statusText.innerHTML = "works";
 }
-// // function selectedGameMode() {}
-// function restartGame() {
-//   //this works don't touch itl
-//   Object.keys(gameBoard).forEach((key) => {
-//     gameBoard[key] = new Array(gameBoard[key].length).fill("");
-//     cells.forEach((cell) => {
-//       cell.innerHTML = "";
-//     });
-//   });
-// }
 
-//add a timer with different difficulty levels
+//loops over each cell block and adds x or o depending on the players turn
 cells.forEach((cell, index) => {
   cell.addEventListener("click", (e) => {
     // check if the cell is empty then assign a value to it
