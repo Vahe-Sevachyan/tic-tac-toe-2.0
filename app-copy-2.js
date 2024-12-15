@@ -42,20 +42,36 @@ const playerO = {
   pick: "",
   score: 0,
 };
-function finalGameWinner() {
+function resetFinalGameScore() {
+  playerX.score = 0;
+  playerO.score = 0;
+  playerXScore.innerHTML = `Score: ${playerX.score}`;
+  playerOScore.innerHTML = `Score: ${playerO.score}`;
+}
+function checkFinalGameWinner() {
   if (playerX.score === 5) {
     statusText.innerHTML = `Game Over Player X Wins${playerX.score} to ${playerO.score}`;
+    timerElement.style.display = "none";
+    console.log("code reached here");
   } else if (playerO.score === 5) {
     statusText.innerHTML = `Game Over Player O Wins${playerO.score} to ${playerX.score}`;
+    timerElement.style.display = "none";
   }
 }
+// function checkFinalScore(playerX, PlayerO) {
+//   if (playerX === 5) {
+//   } else if (PlayerO === 5) {
+//   }
+// }
 function addPointPlayerX() {
   playerX.score += 1;
   playerXScore.innerHTML = `Score: ${playerX.score}`;
+  checkFinalGameWinner();
 }
 function addPointPlayerO() {
   playerO.score += 1;
   playerOScore.innerHTML = `Score: ${playerO.score}`;
+  checkFinalGameWinner();
 }
 // Function to update the glow color dynamically
 function updateGlowColor() {
@@ -93,8 +109,7 @@ startButton.addEventListener("click", () => {
   }
 });
 
-//restart the game an resets the game board
-newGameButton.addEventListener("click", () => {
+function startNewGameButton() {
   //clears all cell blocks in gamBoard object
   Object.keys(gameBoard).forEach((key) => {
     gameBoard[key] = new Array(gameBoard[key].length).fill("");
@@ -110,7 +125,6 @@ newGameButton.addEventListener("click", () => {
   statusText.innerHTML = "";
   clearInterval(intervalX);
   clearInterval(intervalO);
-
   turn = "X";
   countdown = 10;
   timerElement.textContent = countdown;
@@ -123,7 +137,42 @@ newGameButton.addEventListener("click", () => {
   startButton.disabled = false;
   startButton.style.backgroundColor = "dodgerBlue";
   statusText.style.color = "dodgerBlue";
+}
+
+newGameButton.addEventListener("click", () => {
+  startNewGameButton();
 });
+//restart the game an resets the game board
+// newGameButton.addEventListener("click", () => {
+//   //clears all cell blocks in gamBoard object
+//   Object.keys(gameBoard).forEach((key) => {
+//     gameBoard[key] = new Array(gameBoard[key].length).fill("");
+//     cells.forEach((cell) => {
+//       cell.innerHTML = "";
+//     });
+//   });
+//   cells.forEach((cell) => {
+//     //deactivate gameBoard
+//     cell.style.pointerEvents = "none";
+//     cell.style.opacity = 0.1;
+//   });
+//   statusText.innerHTML = "";
+//   clearInterval(intervalX);
+//   clearInterval(intervalO);
+
+//   turn = "X";
+//   countdown = 10;
+//   timerElement.textContent = countdown;
+//   timerElement.style.display = "inline-block";
+//   timerElement.style.opacity = 0.3;
+//   timerElement.style.color = "grey";
+//   timerElement.style.borderColor = "grey";
+//   timerElement.innerHTML = "10";
+//   startButton.style.backgroundColor = "grey";
+//   startButton.disabled = false;
+//   startButton.style.backgroundColor = "dodgerBlue";
+//   statusText.style.color = "dodgerBlue";
+// });
 
 //checks if all cells are full
 function areAllCellsFull() {
