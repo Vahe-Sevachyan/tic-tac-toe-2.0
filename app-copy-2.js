@@ -225,11 +225,13 @@ function xWinnerTextBanner(displayText) {
   timerElement.style.color = "dodgerBlue";
   timerElement.style.borderColor = "dodgerBlue";
 }
+
 function oWinnerTextBanner(displayText) {
   timerElement.textContent = displayText;
   timerElement.style.color = "green";
   timerElement.style.borderColor = "green";
 }
+
 function winnerCheck() {
   winnerCheckHorizontalX();
   winnerCheckHorizontalO();
@@ -263,6 +265,7 @@ function cellsCheck(selectedCell, index) {
     gameBoard.row3[2] = selectedCell.innerHTML;
   }
 }
+
 function clearGameBoard() {
   cells.forEach((cell) => {
     //deactivate gameBoard
@@ -275,6 +278,7 @@ function clearGameBoard() {
   statusText.innerHTML = "";
   turn = "X";
 }
+
 function winnerCheckHorizontalX() {
   if (
     gameBoard.row1[0] === "X" &&
@@ -302,6 +306,7 @@ function winnerCheckHorizontalX() {
     xWinnerTextBanner("X is the Winner R3!");
   }
 }
+
 function winnerCheckHorizontalO() {
   if (
     gameBoard.row1[0] === "O" &&
@@ -351,6 +356,7 @@ function winnerCheckVerticalX() {
     xWinnerTextBanner("X is the Winner C3!");
   }
 }
+
 function winnerCheckVerticalO() {
   if (
     gameBoard.row1[0] === "O" &&
@@ -375,6 +381,7 @@ function winnerCheckVerticalO() {
     oWinnerTextBanner("O is the Winner C3!");
   }
 }
+
 function krisCrossX() {
   if (
     gameBoard.row1[0] === "X" &&
