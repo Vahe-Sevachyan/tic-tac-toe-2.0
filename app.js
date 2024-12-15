@@ -46,13 +46,15 @@ difficultyLevelEasyBtn.addEventListener("click", () => {
   // Update the timer every second
   timerElement.style.display = "inline-block";
   timerElement.style.opacity = 0.3;
-  turn = "X";
+  timerElement.style.color = "dodgerBlue";
+  timerElement.style.borderColor = "dodgerBlue";
   timerElement.innerHTML = "10";
   statusText.style.display = "block";
   gameModeChosen = "easy";
   startButton.disabled = false;
-  startButton.style.backgroundColor = "dodgerBlue";
+  startButton.style.backgroundColor = "mediumSlateBlue";
   statusText.style.color = "dodgerBlue";
+  statusText.innerHTML = "Player X's Turn";
 });
 
 //starts the game and the timer clock
@@ -79,53 +81,43 @@ restartButton.addEventListener("click", () => {
       cell.innerHTML = "";
     });
   });
-  clearInterval(intervalX);
-  clearInterval(intervalO);
   gameModeChosen = "";
+
+  console.log(turn);
   timerElement.innerHTML = "";
   timerElement.style.display = "none";
+  statusText.innerHTML = "";
   statusText.style.display = "none";
-  startButton.disabled = true;
   startButton.style.backgroundColor = "grey";
-  // cells.style.pointerEvents = "none";
-  cells.forEach((cell) => {
-    //deactivate gameBoard
-    cell.style.pointerEvents = "none";
-    cell.style.opacity = 0.3;
-  });
+  clearGameBoard();
 });
-
-// function clearGameBoard() {
-//   cells.forEach((cell) => {
-//     //deactivate gameBoard
-//     cell.style.pointerEvents = "none";
-//     cell.style.opacity = 0.8;
-//   });
-//   clearInterval(intervalX);
-//   clearInterval(intervalO);
-//   statusText.innerHTML = "works";
-// }
 
 //loops over each cell block and adds x or o depending on the players turn
 cells.forEach((cell, index) => {
   cell.addEventListener("click", (e) => {
     // check if the cell is empty then assign a value to it
     if (e.target.innerText === "" && turn === "X") {
+      console.log("turn was x");
       e.target.innerText = "X";
       e.target.style.color = "dodgerBlue";
       statusText.innerHTML = "Player O's Turn";
       statusText.style.color = "green";
+      timerElement.style.borderColor = "green";
+      timerElement.style.color = "green";
       turn = "O";
       cellsCheck(cell, index);
       winnerCheck();
       playerX.pick = e.target.innerText;
     } else if (e.target.innerText === "" && turn === "O") {
+      console.log("turn was o");
       playerX.pick = "";
       e.target.innerText = "O";
       turn = "X";
       playerO.pick = e.target.innerText;
       e.target.style.color = "green";
       statusText.style.color = "dodgerBlue";
+      timerElement.style.borderColor = "dodgerBlue";
+      timerElement.style.color = "dodgerBlue";
       statusText.innerHTML = "Player X's Turn";
       cellsCheck(cell, index);
       winnerCheck();
@@ -137,39 +129,68 @@ function interval_X_Timer() {
   intervalX = setInterval(() => {
     countdown--;
     timerElement.textContent = countdown;
-    if (countdown === 0 && playerX.pick === "") {
-      clearInterval(intervalX); // Stop the timer
-      timerElement.textContent = "Time's up!";
-      console.log("player x didnt pick anything");
-    } else if (playerX.pick === "X") {
+    if (playerX.pick === "X") {
       countdown = 11;
       interval_O_Timer();
       clearInterval(intervalX);
       turn = "O";
       playerX.pick = "";
-      console.log("player x picked something");
+    } else if (countdown === 0 && playerX.pick === "") {
+      clearInterval(intervalX); // Stop the timer
+      timerElement.textContent = "Time's up!";
     }
   }, 1000);
 }
-
 function interval_O_Timer() {
   intervalO = setInterval(() => {
     countdown--;
     timerElement.textContent = countdown;
-    if (countdown === 0 && playerO.pick === "") {
-      clearInterval(intervalO); // Stop the timer
-      timerElement.textContent = "Time's up!";
-      console.log("player o didn't pick anything");
-    } else if (playerO.pick === "O") {
+    if (playerO.pick === "O") {
+      clearInterval(intervalO);
       countdown = 11;
       turn = "X";
       interval_X_Timer();
       playerO.pick = "";
-      clearInterval(intervalO);
-      console.log("player 'O' picked something");
+    } else if (countdown === 0 && playerO.pick === "") {
+      clearInterval(intervalO); // Stop the timer
+      timerElement.textContent = "Time's up!";
     }
   }, 1000);
 }
+
+// function interval_X_Timer() {
+//   intervalX = setInterval(() => {
+//     countdown--;
+//     timerElement.textContent = countdown;
+//     if (countdown === 0 && playerX.pick === "") {
+//       clearInterval(intervalX); // Stop the timer
+//       timerElement.textContent = "Time's up!";
+//     } else if (playerX.pick === "X") {
+//       countdown = 11;
+//       interval_O_Timer();
+//       clearInterval(intervalX);
+//       turn = "O";
+//       playerX.pick = "";
+//     }
+//   }, 1000);
+// }
+
+// function interval_O_Timer() {
+//   intervalO = setInterval(() => {
+//     countdown--;
+//     timerElement.textContent = countdown;
+//     if (countdown === 0 && playerO.pick === "") {
+//       clearInterval(intervalO); // Stop the timer
+//       timerElement.textContent = "Time's up!";
+//     } else if (playerO.pick === "O") {
+//       countdown = 11;
+//       turn = "X";
+//       interval_X_Timer();
+//       playerO.pick = "";
+//       clearInterval(intervalO);
+//     }
+//   }, 1000);
+// }
 
 // function triggerFunction() {
 //   gameOverText.innerHTML = `Game is Over ${turn} missed his turn.`;
@@ -217,7 +238,8 @@ function clearGameBoard() {
   startButton.disabled = true;
   clearInterval(intervalX);
   clearInterval(intervalO);
-  statusText.innerHTML = "works";
+  statusText.innerHTML = "";
+  turn = "X";
 }
 function winnerCheckHorizontalX() {
   if (
@@ -225,27 +247,22 @@ function winnerCheckHorizontalX() {
     gameBoard.row1[1] === "X" &&
     gameBoard.row1[2] === "X"
   ) {
-    // console.log("X is the Horizontal Winner Row 1");
-    // clearInterval(intervalX); // Stop the timer
     clearGameBoard();
     timerElement.textContent = "X is the Horizontal Winner Row 1";
-    statusText.innerHTML = "";
   } else if (
     gameBoard.row2[0] === "X" &&
     gameBoard.row2[1] === "X" &&
     gameBoard.row2[2] === "X"
   ) {
-    clearInterval(intervalX); // Stop the timer
+    clearGameBoard();
     timerElement.textContent = "X is the Horizontal Winner Row 2";
-    statusText.innerHTML = "";
   } else if (
     gameBoard.row3[0] === "X" &&
     gameBoard.row3[1] === "X" &&
     gameBoard.row3[2] === "X"
   ) {
-    clearInterval(intervalX); // Stop the timer
+    clearGameBoard();
     timerElement.textContent = "X is the Horizontal Winner Row 3";
-    statusText.innerHTML = "";
   }
 }
 function winnerCheckHorizontalO() {
@@ -254,25 +271,22 @@ function winnerCheckHorizontalO() {
     gameBoard.row1[1] === "O" &&
     gameBoard.row1[2] === "O"
   ) {
-    clearInterval(intervalX); // Stop the timer
+    clearGameBoard();
     timerElement.textContent = "O is the Horizontal Winner Row 1";
-    statusText.innerHTML = "";
   } else if (
     gameBoard.row2[0] === "O" &&
     gameBoard.row2[1] === "O" &&
     gameBoard.row2[2] === "O"
   ) {
-    clearInterval(intervalX); // Stop the timer
+    clearGameBoard();
     timerElement.textContent = "O is the Horizontal Winner Row 2";
-    statusText.innerHTML = "";
   } else if (
     gameBoard.row3[0] === "O" &&
     gameBoard.row3[1] === "O" &&
     gameBoard.row3[2] === "O"
   ) {
-    clearInterval(intervalX); // Stop the timer
+    clearGameBoard();
     timerElement.textContent = "O is the Horizontal Winner Row 3";
-    statusText.innerHTML = "";
   }
 }
 
@@ -282,25 +296,22 @@ function winnerCheckVerticalX() {
     gameBoard.row2[0] === "X" &&
     gameBoard.row3[0] === "X"
   ) {
-    clearInterval(intervalX); // Stop the timer
+    clearGameBoard();
     timerElement.textContent = "X wins vertically first row";
-    statusText.innerHTML = "";
   } else if (
     gameBoard.row1[1] === "X" &&
     gameBoard.row2[1] === "X" &&
     gameBoard.row3[1] === "X"
   ) {
-    clearInterval(intervalX); // Stop the timer
+    clearGameBoard();
     timerElement.textContent = "X wins vertically second row";
-    statusText.innerHTML = "";
   } else if (
     gameBoard.row1[2] === "X" &&
     gameBoard.row2[2] === "X" &&
     gameBoard.row3[2] === "X"
   ) {
-    clearInterval(intervalX); // Stop the timer
+    clearGameBoard();
     timerElement.textContent = "X wins vertically third row";
-    statusText.innerHTML = "";
   }
 }
 function winnerCheckVerticalO() {
@@ -309,25 +320,22 @@ function winnerCheckVerticalO() {
     gameBoard.row2[0] === "O" &&
     gameBoard.row3[0] === "O"
   ) {
-    clearInterval(intervalX); // Stop the timer
+    clearGameBoard();
     timerElement.textContent = "O wins vertically first row";
-    statusText.innerHTML = "";
   } else if (
     gameBoard.row1[1] === "O" &&
     gameBoard.row2[1] === "O" &&
     gameBoard.row3[1] === "O"
   ) {
-    clearInterval(intervalX); // Stop the timer
+    clearGameBoard();
     timerElement.textContent = "O wins vertically first row";
-    statusText.innerHTML = "";
   } else if (
     gameBoard.row1[2] === "O" &&
     gameBoard.row2[2] === "O" &&
     gameBoard.row3[2] === "O"
   ) {
-    clearInterval(intervalX); // Stop the timer
+    clearGameBoard();
     timerElement.textContent = "X wins vertically third row";
-    statusText.innerHTML = "";
   }
 }
 function krisCrossX() {
@@ -336,23 +344,15 @@ function krisCrossX() {
     gameBoard.row2[1] === "X" &&
     gameBoard.row3[2] === "X"
   ) {
-    clearInterval(intervalX); // Stop the timer
+    clearGameBoard();
     timerElement.textContent = "X wins krisCross";
-    statusText.innerHTML = "";
   } else if (
     gameBoard.row1[2] === "X" &&
     gameBoard.row2[1] === "X" &&
     gameBoard.row3[0] === "X"
   ) {
-    // clearInterval(intervalX); // Stop the timer
-    timerElement.textContent = "X Wins krisCross";
-    // statusText.innerHTML = "";
     clearGameBoard();
-    // cells.forEach((cell) => {
-    //   //deactivate gameBoard
-    //   cell.style.pointerEvents = "none";
-    //   cell.style.opacity = 0.8;
-    // });
+    timerElement.textContent = "X Wins krisCross";
   }
 }
 
@@ -362,16 +362,13 @@ function krisCrossO() {
     gameBoard.row2[1] === "O" &&
     gameBoard.row3[2] === "O"
   ) {
-    clearInterval(intervalO); // Stop the timer
+    clearGameBoard();
     timerElement.textContent = "O wins krisCross";
-    statusText.innerHTML = "";
   } else if (
     gameBoard.row1[2] === "O" &&
     gameBoard.row2[1] === "O" &&
     gameBoard.row3[0] === "O"
   ) {
-    // clearInterval(intervalO); // Stop the timer
-    //  statusText.innerHTML = "";
     timerElement.textContent = "O wins krisCross";
     clearGameBoard();
   }
