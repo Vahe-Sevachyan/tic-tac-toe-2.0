@@ -95,6 +95,10 @@ newGameButton.addEventListener("click", () => {
   startButton.style.backgroundColor = "dodgerBlue";
   statusText.style.color = "dodgerBlue";
 });
+function areAllCellsFull() {
+  const cells = document.querySelectorAll(".cell"); // Adjust the selector if your cell class is named differently
+  return Array.from(cells).every((cell) => cell.innerText !== "");
+}
 
 //loops over each cell block and adds x or o depending on the players turn
 cells.forEach((cell, index) => {
@@ -110,14 +114,20 @@ cells.forEach((cell, index) => {
       statusText.style.color = "green";
       timerElement.style.color = "green";
       timerElement.style.borderColor = "green";
-
+      countdown = 11;
       // Clear and restart timer for Player O
       clearInterval(intervalX);
-      countdown = 11;
       interval_O_Timer();
-
       cellsCheck(cell, index);
       winnerCheck();
+      if (areAllCellsFull()) {
+        console.log("All cells are full. It's a tie!");
+        timerElement.textContent = "It's a Tie!";
+        timerElement.style.color = "orange";
+        timerElement.style.borderColor = "orange";
+        clearInterval(intervalX);
+        clearInterval(intervalO);
+      }
     } else if (e.target.innerText === "" && turn === "O") {
       // Player O makes a move
       console.log("Player O clicked");
@@ -129,14 +139,21 @@ cells.forEach((cell, index) => {
       statusText.style.color = "dodgerBlue";
       timerElement.style.color = "dodgerBlue";
       timerElement.style.borderColor = "dodgerBlue";
-
-      // Clear and restart timer for Player X
-      clearInterval(intervalO);
       countdown = 11;
-      interval_X_Timer();
+      // Clear and restart timer for Player X
 
+      clearInterval(intervalO);
+      interval_X_Timer();
       cellsCheck(cell, index);
       winnerCheck();
+      if (areAllCellsFull()) {
+        console.log("All cells are full. It's a tie!");
+        timerElement.style.color = "orange";
+        timerElement.style.borderColor = "orange";
+        timerElement.textContent = "It's a Tie!";
+        clearInterval(intervalX);
+        clearInterval(intervalO);
+      }
     }
   });
 });
