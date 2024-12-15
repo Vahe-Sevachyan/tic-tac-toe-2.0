@@ -7,7 +7,7 @@ const difficultyLevelHard = document.querySelector(".hard");
 const timerElement = document.getElementById("timer");
 const gameOverText = document.querySelector(".gameOverText");
 const statusText = document.querySelector(".status-text");
-const restartButton = document.querySelector(".restart-game");
+const newGameButton = document.querySelector(".new-game-button");
 let countdown = 10;
 let turn = "X";
 let winner = null;
@@ -41,28 +41,19 @@ const playerO = {
   pick: "",
 };
 
-//#1 chose difficulty level
-difficultyLevelEasyBtn.addEventListener("click", () => {
-  // Update the timer every second
-  timerElement.style.display = "inline-block";
-  timerElement.style.opacity = 0.3;
-  timerElement.style.color = "dodgerBlue";
-  timerElement.style.borderColor = "dodgerBlue";
-  timerElement.innerHTML = "10";
-  statusText.style.display = "block";
-  gameModeChosen = "easy";
-  startButton.disabled = false;
-  startButton.style.backgroundColor = "mediumSlateBlue";
-  statusText.style.color = "dodgerBlue";
-  statusText.innerHTML = "Player X's Turn";
-});
-
 //starts the game and the timer clock
 startButton.addEventListener("click", () => {
-  if (startButton.disabled === false && gameModeChosen === "easy") {
+  if (startButton.disabled === false) {
     //changes the pointer event value in css to activate the board and allow selection
     timerElement.style.opacity = 1;
-
+    statusText.innerHTML = "Player X's Turn";
+    statusText.style.color = "dodgerBlue";
+    timerElement.style.color = "dodgerBlue";
+    timerElement.style.borderColor = "dodgerBlue";
+    timerElement.innerHTML = "10";
+    turn = "X";
+    clearInterval(intervalX);
+    clearInterval(intervalO);
     cells.forEach((cell) => {
       //activate gameBoard
       cell.style.pointerEvents = "auto";
@@ -73,7 +64,7 @@ startButton.addEventListener("click", () => {
 });
 
 //restart the game an resets the game board
-restartButton.addEventListener("click", () => {
+newGameButton.addEventListener("click", () => {
   //clears all cell blocks in gamBoard object
   Object.keys(gameBoard).forEach((key) => {
     gameBoard[key] = new Array(gameBoard[key].length).fill("");
@@ -81,15 +72,26 @@ restartButton.addEventListener("click", () => {
       cell.innerHTML = "";
     });
   });
-  gameModeChosen = "";
-
-  console.log(turn);
-  timerElement.innerHTML = "";
-  timerElement.style.display = "none";
+  cells.forEach((cell) => {
+    //deactivate gameBoard
+    cell.style.pointerEvents = "none";
+    cell.style.opacity = 0.1;
+  });
   statusText.innerHTML = "";
-  statusText.style.display = "none";
+  gameModeChosen = "";
+  clearInterval(intervalX);
+  clearInterval(intervalO);
+  turn = "X";
+  console.log(turn);
+  timerElement.style.display = "inline-block";
+  timerElement.style.opacity = 0.3;
+  timerElement.style.color = "grey";
+  timerElement.style.borderColor = "grey";
+  timerElement.innerHTML = "10";
   startButton.style.backgroundColor = "grey";
-  clearGameBoard();
+  startButton.disabled = false;
+  startButton.style.backgroundColor = "dodgerBlue";
+  statusText.style.color = "dodgerBlue";
 });
 
 //loops over each cell block and adds x or o depending on the players turn

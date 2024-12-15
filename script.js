@@ -102,7 +102,6 @@ function clearGameBoard() {
     cell.style.pointerEvents = "none";
     cell.style.opacity = 0.8;
   });
-
   clearInterval(intervalX);
   clearInterval(intervalO);
   statusText.innerHTML = "works";
@@ -141,6 +140,7 @@ cells.forEach((cell, index) => {
 function interval_X_Timer() {
   console.log("interval x block");
   intervalX = setInterval(() => {
+    console.log("set interval started");
     countdown--;
     timerElement.textContent = countdown;
     if (countdown === 0 && playerX.pick === "") {
