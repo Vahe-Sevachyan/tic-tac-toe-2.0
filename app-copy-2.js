@@ -15,8 +15,8 @@ let gameModeChosen = "";
 let intervalX;
 let intervalO;
 startButton.disabled = true;
-timerElement.style.display = "none";
-
+// timerElement.style.display = "none";
+timerElement.style.opacity = 0.3;
 const easyModeTimer = {
   gameTime: 10,
   interval: null,
@@ -41,13 +41,51 @@ const playerO = {
   pick: "",
 };
 
+// function updateGlowColor() {
+//   // Determine the glow color based on the current player
+//   const glowColor = currentPlayer === "Player 1" ? "blue" : "green";
+
+//   // Apply the glow color as a CSS variable
+//   cells.forEach((cell) => {
+//     cell.style.setProperty("--glow-color", glowColor);
+//   });
+// }
+
+// // Toggle the current player
+// function togglePlayer() {
+//   currentPlayer = currentPlayer === "Player 1" ? "Player 2" : "Player 1";
+//   updateGlowColor(); // Update the glow color on player change
+// }
+
+// // Add hover effects and click event listeners
+// cells.forEach((cell) => {
+//   cell.addEventListener("mouseover", updateGlowColor);
+//   cell.addEventListener("click", togglePlayer); // Change the turn when a cell is clicked
+// });
+// Function to update the glow color dynamically
+
+let currentPlayer = "Player 1"; // Can be 'Player 1' or 'Player 2'
+
+function updateGlowColor() {
+  const glowColor = currentPlayer === "Player 1" ? "blue" : "green";
+  cells.forEach((cell) => {
+    cell.style.setProperty("--glow-color", glowColor);
+  });
+}
+
+// Function to toggle the player's turn
+function togglePlayer() {
+  currentPlayer = currentPlayer === "Player 1" ? "Player 2" : "Player 1";
+  updateGlowColor(); // Update the glow color when player changes
+}
 //starts the game and the timer clock
 startButton.addEventListener("click", () => {
-  clearInterval(intervalX);
-  clearInterval(intervalO);
   if (startButton.disabled === false) {
     //changes the pointer event value in css to activate the board and allow selection
     timerElement.style.opacity = 1;
+    currentPlayer = "Player 1";
+    cells.forEach((c) => c.style.setProperty("--glow-color", "dodgerBlue"));
+    // togglePlayer();
     statusText.innerHTML = "Player X's Turn";
     statusText.style.color = "dodgerBlue";
     timerElement.style.color = "dodgerBlue";
@@ -55,7 +93,6 @@ startButton.addEventListener("click", () => {
     // timerElement.innerHTML = "10";
     turn = "X";
     // countdown = 10;
-
     cells.forEach((cell) => {
       //activate gameBoard
       cell.style.pointerEvents = "auto";
@@ -82,6 +119,7 @@ newGameButton.addEventListener("click", () => {
   statusText.innerHTML = "";
   clearInterval(intervalX);
   clearInterval(intervalO);
+
   turn = "X";
   countdown = 10;
   timerElement.textContent = countdown;
@@ -95,6 +133,7 @@ newGameButton.addEventListener("click", () => {
   startButton.style.backgroundColor = "dodgerBlue";
   statusText.style.color = "dodgerBlue";
 });
+//checks if all cells are full
 function areAllCellsFull() {
   const cells = document.querySelectorAll(".cell"); // Adjust the selector if your cell class is named differently
   return Array.from(cells).every((cell) => cell.innerText !== "");
@@ -104,8 +143,10 @@ function areAllCellsFull() {
 cells.forEach((cell, index) => {
   cell.addEventListener("click", (e) => {
     if (e.target.innerText === "" && turn === "X") {
-      // Player X makes a move
       console.log("Player X clicked");
+      // **
+      cells.forEach((c) => c.style.setProperty("--glow-color", "green"));
+      // **
       e.target.innerText = "X";
       e.target.style.color = "dodgerBlue";
       playerX.pick = e.target.innerText;
@@ -121,7 +162,6 @@ cells.forEach((cell, index) => {
       cellsCheck(cell, index);
       winnerCheck();
       if (areAllCellsFull()) {
-        console.log("All cells are full. It's a tie!");
         timerElement.textContent = "It's a Tie!";
         timerElement.style.color = "orange";
         timerElement.style.borderColor = "orange";
@@ -130,7 +170,10 @@ cells.forEach((cell, index) => {
       }
     } else if (e.target.innerText === "" && turn === "O") {
       // Player O makes a move
-      console.log("Player O clicked");
+      // cell.classList.add("cell2");
+      // **
+      cells.forEach((c) => c.style.setProperty("--glow-color", "dodgerBlue"));
+      // **
       e.target.innerText = "O";
       e.target.style.color = "green";
       playerO.pick = e.target.innerText;
@@ -141,13 +184,11 @@ cells.forEach((cell, index) => {
       timerElement.style.borderColor = "dodgerBlue";
       countdown = 11;
       // Clear and restart timer for Player X
-
       clearInterval(intervalO);
       interval_X_Timer();
       cellsCheck(cell, index);
       winnerCheck();
       if (areAllCellsFull()) {
-        console.log("All cells are full. It's a tie!");
         timerElement.style.color = "orange";
         timerElement.style.borderColor = "orange";
         timerElement.textContent = "It's a Tie!";
@@ -165,7 +206,7 @@ function interval_X_Timer() {
 
     if (countdown === 0) {
       clearInterval(intervalX); // Stop the timer
-      timerElement.textContent = "Time's up! Player O's Turn";
+      timerElement.textContent = "Time's up! Player O's Turn!";
       statusText.innerHTML = "Player O's Turn";
       statusText.style.color = "green";
       timerElement.style.color = "green";
@@ -184,7 +225,7 @@ function interval_O_Timer() {
 
     if (countdown === 0) {
       clearInterval(intervalO); // Stop the timer
-      timerElement.textContent = "Time's up! Player X's Turn";
+      timerElement.textContent = "Time's up! Player X's Turn!";
       statusText.innerHTML = "Player X's Turn";
       statusText.style.color = "dodgerBlue";
       timerElement.style.color = "dodgerBlue";
@@ -196,6 +237,11 @@ function interval_O_Timer() {
   }, 1000);
 }
 
+function xWinnerTextBanner(displayText) {
+  timerElement.textContent = displayText;
+  timerElement.style.color = "dodgerBlue";
+  timerElement.style.borderColor = "dodgerBlue";
+}
 function winnerCheck() {
   winnerCheckHorizontalX();
   winnerCheckHorizontalO();
@@ -248,21 +294,24 @@ function winnerCheckHorizontalX() {
     gameBoard.row1[2] === "X"
   ) {
     clearGameBoard();
-    timerElement.textContent = "X is the Horizontal Winner Row 1";
+    xWinnerTextBanner("X is the Winner R1!");
+    // timerElement.textContent = "X is the Horizontal Winner Row 1";
   } else if (
     gameBoard.row2[0] === "X" &&
     gameBoard.row2[1] === "X" &&
     gameBoard.row2[2] === "X"
   ) {
     clearGameBoard();
-    timerElement.textContent = "X is the Horizontal Winner Row 2";
+    // timerElement.textContent = "X is the Horizontal Winner Row 2";
+    xWinnerTextBanner("X is the Winner R2!");
   } else if (
     gameBoard.row3[0] === "X" &&
     gameBoard.row3[1] === "X" &&
     gameBoard.row3[2] === "X"
   ) {
     clearGameBoard();
-    timerElement.textContent = "X is the Horizontal Winner Row 3";
+    // timerElement.textContent = "X is the Horizontal Winner Row 3";
+    xWinnerTextBanner("X is the Winner R3!");
   }
 }
 function winnerCheckHorizontalO() {
@@ -297,7 +346,8 @@ function winnerCheckVerticalX() {
     gameBoard.row3[0] === "X"
   ) {
     clearGameBoard();
-    timerElement.textContent = "X wins vertically first row";
+    // timerElement.textContent = "X wins vertically first row";
+    xWinnerTextBanner("X is the Winner C1!");
   } else if (
     gameBoard.row1[1] === "X" &&
     gameBoard.row2[1] === "X" &&
