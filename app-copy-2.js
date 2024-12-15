@@ -8,6 +8,7 @@ const timerElement = document.getElementById("timer");
 const gameOverText = document.querySelector(".gameOverText");
 const statusText = document.querySelector(".status-text");
 const newGameButton = document.querySelector(".new-game-button");
+const resetFinalScoreButton = document.querySelector(".reset-button");
 const playerXScore = document.querySelector("#scoreX");
 const playerOScore = document.querySelector("#scoreO");
 let currentPlayer = "Player 1"; // Can be 'Player 1' or 'Player 2'
@@ -52,17 +53,26 @@ function checkFinalGameWinner() {
   if (playerX.score === 5) {
     statusText.innerHTML = `Game Over Player X Wins${playerX.score} to ${playerO.score}`;
     timerElement.style.display = "none";
+    newGameButton.disabled = true;
     console.log("code reached here");
   } else if (playerO.score === 5) {
     statusText.innerHTML = `Game Over Player O Wins${playerO.score} to ${playerX.score}`;
     timerElement.style.display = "none";
+    newGameButton.disabled = true;
   }
 }
+
 // function checkFinalScore(playerX, PlayerO) {
 //   if (playerX === 5) {
 //   } else if (PlayerO === 5) {
 //   }
 // }
+
+resetFinalScoreButton.addEventListener("click", () => {
+  startNewGameButton();
+  resetFinalGameScore();
+  newGameButton.disabled = false;
+});
 function addPointPlayerX() {
   playerX.score += 1;
   playerXScore.innerHTML = `Score: ${playerX.score}`;
