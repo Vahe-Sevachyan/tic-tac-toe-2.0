@@ -12,7 +12,32 @@ body {
   height: 100vh;
   background-color: #15273a;
 }
-
+.scoreboard {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #2d3745;
+  color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  width: 80%;
+  max-width: 700px;
+  margin-bottom: 40px;
+}
+.score {
+  margin-top: 10px;
+}
+/* .status-text {
+  width: 150px;
+} */
+.container {
+  border: 1px solid red;
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 .game-container {
   text-align: center;
   background-color: #333a46;
@@ -66,7 +91,7 @@ h1 {
 }
 
 .status-text {
-  font-size: 18px;
+  font-size: 23px;
   margin-bottom: 10px;
   color: #fff;
 }
@@ -94,29 +119,12 @@ button {
   font-family: "sans-serif", "Lucida Sans Regular", "Lucida Grande";
 }
 
-/* .start-button:hover {
-  color: rgb(20, 161, 46);
-} */
-
-.easy {
-  background-color: rgb(34, 201, 50);
-}
-.medium {
-  background-color: rgb(222, 114, 12);
-}
-.hard {
-  background-color: rgb(182, 44, 20);
-}
 button:hover {
-  /* background-color: rgb(45, 67, 139); */
   background-color: rgb(27, 118, 198);
   cursor: pointer;
   transition: background-color 0.5s ease;
-  /* color: white; */
 }
-.difficulty-container {
-  margin-bottom: 5px;
-}
+
 .timer {
   margin-top: 10px;
 }
