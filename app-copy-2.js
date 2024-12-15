@@ -99,30 +99,42 @@ newGameButton.addEventListener("click", () => {
 //loops over each cell block and adds x or o depending on the players turn
 cells.forEach((cell, index) => {
   cell.addEventListener("click", (e) => {
-    // check if the cell is empty then assign a value to it
     if (e.target.innerText === "" && turn === "X") {
-      console.log("turn was x");
+      // Player X makes a move
+      console.log("Player X clicked");
       e.target.innerText = "X";
       e.target.style.color = "dodgerBlue";
+      playerX.pick = e.target.innerText;
+      turn = "O";
       statusText.innerHTML = "Player O's Turn";
       statusText.style.color = "green";
-      timerElement.style.borderColor = "green";
       timerElement.style.color = "green";
-      turn = "O";
+      timerElement.style.borderColor = "green";
+
+      // Clear and restart timer for Player O
+      clearInterval(intervalX);
+      countdown = 11;
+      interval_O_Timer();
+
       cellsCheck(cell, index);
       winnerCheck();
-      playerX.pick = e.target.innerText;
     } else if (e.target.innerText === "" && turn === "O") {
-      console.log("turn was o");
-      playerX.pick = "";
+      // Player O makes a move
+      console.log("Player O clicked");
       e.target.innerText = "O";
-      turn = "X";
-      playerO.pick = e.target.innerText;
       e.target.style.color = "green";
-      statusText.style.color = "dodgerBlue";
-      timerElement.style.borderColor = "dodgerBlue";
-      timerElement.style.color = "dodgerBlue";
+      playerO.pick = e.target.innerText;
+      turn = "X";
       statusText.innerHTML = "Player X's Turn";
+      statusText.style.color = "dodgerBlue";
+      timerElement.style.color = "dodgerBlue";
+      timerElement.style.borderColor = "dodgerBlue";
+
+      // Clear and restart timer for Player X
+      clearInterval(intervalO);
+      countdown = 11;
+      interval_X_Timer();
+
       cellsCheck(cell, index);
       winnerCheck();
     }
@@ -133,31 +145,36 @@ function interval_X_Timer() {
   intervalX = setInterval(() => {
     countdown--;
     timerElement.textContent = countdown;
-    if (playerX.pick === "X") {
-      countdown = 11;
-      interval_O_Timer();
-      clearInterval(intervalX);
-      turn = "O";
-      playerX.pick = "";
-    } else if (countdown === 0 && playerX.pick === "") {
+
+    if (countdown === 0) {
       clearInterval(intervalX); // Stop the timer
-      timerElement.textContent = "Time's up!";
+      timerElement.textContent = "Time's up! Player O's Turn";
+      statusText.innerHTML = "Player O's Turn";
+      statusText.style.color = "green";
+      timerElement.style.color = "green";
+      timerElement.style.borderColor = "green";
+      turn = "O";
+      countdown = 11;
+      interval_O_Timer(); // Start Player O's timer
     }
   }, 1000);
 }
+
 function interval_O_Timer() {
   intervalO = setInterval(() => {
     countdown--;
     timerElement.textContent = countdown;
-    if (playerO.pick === "O") {
-      clearInterval(intervalO);
-      countdown = 11;
-      turn = "X";
-      interval_X_Timer();
-      playerO.pick = "";
-    } else if (countdown === 0 && playerO.pick === "") {
+
+    if (countdown === 0) {
       clearInterval(intervalO); // Stop the timer
-      timerElement.textContent = "Time's up!";
+      timerElement.textContent = "Time's up! Player X's Turn";
+      statusText.innerHTML = "Player X's Turn";
+      statusText.style.color = "dodgerBlue";
+      timerElement.style.color = "dodgerBlue";
+      timerElement.style.borderColor = "dodgerBlue";
+      turn = "X";
+      countdown = 11;
+      interval_X_Timer(); // Start Player X's timer
     }
   }, 1000);
 }

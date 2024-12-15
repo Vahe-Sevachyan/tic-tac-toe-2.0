@@ -27,10 +27,6 @@ const gameBoard = {
   row2: ["", "", ""],
   row3: ["", "", ""],
 };
-
-// when start game is selected a timer goes off saying player x your turn is up in ${seconds} seconds
-//once the timer expires enable the game board to alow selecting
-
 const playerX = {
   player: "X",
   pick: "",
@@ -40,61 +36,136 @@ const playerO = {
   player: "O",
   pick: "",
 };
+// when start game is selected a timer goes off saying player x your turn is up in ${seconds} seconds
+//once the timer expires enable the game board to alow selecting
 
-//starts the game and the timer clock
-startButton.addEventListener("click", () => {
+function startTurn(player) {
   clearInterval(intervalX);
   clearInterval(intervalO);
-  if (startButton.disabled === false) {
-    //changes the pointer event value in css to activate the board and allow selection
-    timerElement.style.opacity = 1;
+  countdown = 10; // Reset countdown for the new turn
+  timerElement.textContent = countdown;
+
+  if (player === "X") {
     statusText.innerHTML = "Player X's Turn";
     statusText.style.color = "dodgerBlue";
     timerElement.style.color = "dodgerBlue";
     timerElement.style.borderColor = "dodgerBlue";
-    // timerElement.innerHTML = "10";
-    turn = "X";
-    // countdown = 10;
-
-    cells.forEach((cell) => {
-      //activate gameBoard
-      cell.style.pointerEvents = "auto";
-      cell.style.opacity = 1;
-    });
-    interval_X_Timer(); //start timer
+    intervalX = setInterval(() => handleTimer("X"), 1000);
+  } else {
+    statusText.innerHTML = "Player O's Turn";
+    statusText.style.color = "green";
+    timerElement.style.color = "green";
+    timerElement.style.borderColor = "green";
+    intervalO = setInterval(() => handleTimer("O"), 1000);
   }
+}
+
+function handleTimer(player) {
+  countdown--;
+  timerElement.textContent = countdown;
+
+  if (countdown === 0) {
+    clearInterval(player === "X" ? intervalX : intervalO);
+    timerElement.textContent = "Time's up!";
+    switchTurn(player); // Automatically switch turn if time runs out
+  }
+}
+
+function switchTurn(currentPlayer) {
+  const nextPlayer = currentPlayer === "X" ? "O" : "X";
+  startTurn(nextPlayer);
+}
+
+// Starts the game with Player X
+startButton.addEventListener("click", () => {
+  cells.forEach((cell) => {
+    cell.style.pointerEvents = "auto";
+    cell.style.opacity = 1;
+  });
+  startTurn("X"); // Begin with Player X
 });
 
-//restart the game an resets the game board
+// Reset game logic
 newGameButton.addEventListener("click", () => {
-  //clears all cell blocks in gamBoard object
+  clearInterval(intervalX);
+  clearInterval(intervalO);
+  cells.forEach((cell) => {
+    cell.innerHTML = "";
+    cell.style.pointerEvents = "none";
+    cell.style.opacity = 0.1;
+  });
   Object.keys(gameBoard).forEach((key) => {
     gameBoard[key] = new Array(gameBoard[key].length).fill("");
     cells.forEach((cell) => {
       cell.innerHTML = "";
     });
   });
-  cells.forEach((cell) => {
-    //deactivate gameBoard
-    cell.style.pointerEvents = "none";
-    cell.style.opacity = 0.1;
-  });
   statusText.innerHTML = "";
-  clearInterval(intervalX);
-  clearInterval(intervalO);
-  turn = "X";
   countdown = 10;
   timerElement.textContent = countdown;
-  timerElement.style.display = "inline-block";
   timerElement.style.opacity = 0.3;
+  timerElement.style.display = "inline-block";
   timerElement.style.color = "grey";
   timerElement.style.borderColor = "grey";
   timerElement.innerHTML = "10";
-  startButton.style.backgroundColor = "grey";
   startButton.disabled = false;
   startButton.style.backgroundColor = "dodgerBlue";
-  statusText.style.color = "dodgerBlue";
 });
+
+//starts the game and the timer clock
+// startButton.addEventListener("click", () => {
+//   clearInterval(intervalX);
+//   clearInterval(intervalO);
+//   if (startButton.disabled === false) {
+//     //changes the pointer event value in css to activate the board and allow selection
+//     timerElement.style.opacity = 1;
+//     statusText.innerHTML = "Player X's Turn";
+//     statusText.style.color = "dodgerBlue";
+//     timerElement.style.color = "dodgerBlue";
+//     timerElement.style.borderColor = "dodgerBlue";
+//     // timerElement.innerHTML = "10";
+//     turn = "X";
+//     // countdown = 10;
+
+//     cells.forEach((cell) => {
+//       //activate gameBoard
+//       cell.style.pointerEvents = "auto";
+//       cell.style.opacity = 1;
+//     });
+//     interval_X_Timer(); //start timer
+//   }
+// });
+
+//restart the game an resets the game board
+// newGameButton.addEventListener("click", () => {
+//   //clears all cell blocks in gamBoard object
+//   Object.keys(gameBoard).forEach((key) => {
+//     gameBoard[key] = new Array(gameBoard[key].length).fill("");
+//     cells.forEach((cell) => {
+//       cell.innerHTML = "";
+//     });
+//   });
+//   cells.forEach((cell) => {
+//     //deactivate gameBoard
+//     cell.style.pointerEvents = "none";
+//     cell.style.opacity = 0.1;
+//   });
+//   statusText.innerHTML = "";
+//   clearInterval(intervalX);
+//   clearInterval(intervalO);
+//   turn = "X";
+//   countdown = 10;
+//   timerElement.textContent = countdown;
+//   timerElement.style.display = "inline-block";
+//   timerElement.style.opacity = 0.3;
+//   timerElement.style.color = "grey";
+//   timerElement.style.borderColor = "grey";
+//   timerElement.innerHTML = "10";
+//   startButton.style.backgroundColor = "grey";
+//   startButton.disabled = false;
+//   startButton.style.backgroundColor = "dodgerBlue";
+//   statusText.style.color = "dodgerBlue";
+// });
 
 //loops over each cell block and adds x or o depending on the players turn
 cells.forEach((cell, index) => {
