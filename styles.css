@@ -166,3 +166,14 @@ button:hover {
   border-color: var(--glow-color);
   box-shadow: 0 0 8px var(--glow-color);
 }
+.reset-button {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 1rem;
+  font-weight: bold;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}

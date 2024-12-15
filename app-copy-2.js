@@ -8,6 +8,8 @@ const timerElement = document.getElementById("timer");
 const gameOverText = document.querySelector(".gameOverText");
 const statusText = document.querySelector(".status-text");
 const newGameButton = document.querySelector(".new-game-button");
+const playerXScore = document.querySelector("#scoreX");
+const playerOScore = document.querySelector("#scoreO");
 let currentPlayer = "Player 1"; // Can be 'Player 1' or 'Player 2'
 let countdown = 10;
 let turn = "X";
@@ -40,12 +42,20 @@ const playerO = {
   pick: "",
   score: 0,
 };
-function gameWinner() {
+function finalGameWinner() {
   if (playerX.score === 5) {
     statusText.innerHTML = `Game Over Player X Wins${playerX.score} to ${playerO.score}`;
   } else if (playerO.score === 5) {
     statusText.innerHTML = `Game Over Player O Wins${playerO.score} to ${playerX.score}`;
   }
+}
+function addPointPlayerX() {
+  playerX.score += 1;
+  playerXScore.innerHTML = `Score: ${playerX.score}`;
+}
+function addPointPlayerO() {
+  playerO.score += 1;
+  playerOScore.innerHTML = `Score: ${playerO.score}`;
 }
 // Function to update the glow color dynamically
 function updateGlowColor() {
@@ -287,6 +297,7 @@ function winnerCheckHorizontalX() {
   ) {
     clearGameBoard();
     xWinnerTextBanner("X is the Winner R1!");
+    addPointPlayerX();
     // timerElement.textContent = "X is the Horizontal Winner Row 1";
   } else if (
     gameBoard.row2[0] === "X" &&
@@ -296,6 +307,7 @@ function winnerCheckHorizontalX() {
     clearGameBoard();
     // timerElement.textContent = "X is the Horizontal Winner Row 2";
     xWinnerTextBanner("X is the Winner R2!");
+    addPointPlayerX();
   } else if (
     gameBoard.row3[0] === "X" &&
     gameBoard.row3[1] === "X" &&
@@ -304,6 +316,7 @@ function winnerCheckHorizontalX() {
     clearGameBoard();
     // timerElement.textContent = "X is the Horizontal Winner Row 3";
     xWinnerTextBanner("X is the Winner R3!");
+    addPointPlayerX();
   }
 }
 
@@ -315,6 +328,7 @@ function winnerCheckHorizontalO() {
   ) {
     clearGameBoard();
     oWinnerTextBanner("O is the Winner R1!");
+    addPointPlayerO();
   } else if (
     gameBoard.row2[0] === "O" &&
     gameBoard.row2[1] === "O" &&
@@ -322,6 +336,7 @@ function winnerCheckHorizontalO() {
   ) {
     clearGameBoard();
     oWinnerTextBanner("O is the Winner R2!");
+    addPointPlayerO();
   } else if (
     gameBoard.row3[0] === "O" &&
     gameBoard.row3[1] === "O" &&
@@ -329,6 +344,7 @@ function winnerCheckHorizontalO() {
   ) {
     clearGameBoard();
     oWinnerTextBanner("O is the Winner R3!");
+    addPointPlayerO();
   }
 }
 
@@ -340,6 +356,7 @@ function winnerCheckVerticalX() {
   ) {
     clearGameBoard();
     xWinnerTextBanner("X is the Winner C1!");
+    addPointPlayerX();
   } else if (
     gameBoard.row1[1] === "X" &&
     gameBoard.row2[1] === "X" &&
@@ -347,6 +364,7 @@ function winnerCheckVerticalX() {
   ) {
     clearGameBoard();
     xWinnerTextBanner("X is the Winner C2!");
+    addPointPlayerX();
   } else if (
     gameBoard.row1[2] === "X" &&
     gameBoard.row2[2] === "X" &&
@@ -354,6 +372,7 @@ function winnerCheckVerticalX() {
   ) {
     clearGameBoard();
     xWinnerTextBanner("X is the Winner C3!");
+    addPointPlayerX();
   }
 }
 
@@ -365,6 +384,7 @@ function winnerCheckVerticalO() {
   ) {
     clearGameBoard();
     oWinnerTextBanner("O is the Winner C1!");
+    addPointPlayerO();
   } else if (
     gameBoard.row1[1] === "O" &&
     gameBoard.row2[1] === "O" &&
@@ -372,6 +392,7 @@ function winnerCheckVerticalO() {
   ) {
     clearGameBoard();
     oWinnerTextBanner("O is the Winner C2!");
+    addPointPlayerO();
   } else if (
     gameBoard.row1[2] === "O" &&
     gameBoard.row2[2] === "O" &&
@@ -379,6 +400,7 @@ function winnerCheckVerticalO() {
   ) {
     clearGameBoard();
     oWinnerTextBanner("O is the Winner C3!");
+    addPointPlayerO();
   }
 }
 
@@ -390,6 +412,7 @@ function krisCrossX() {
   ) {
     clearGameBoard();
     xWinnerTextBanner("X is the Winner Kris-Kros!");
+    addPointPlayerX();
   } else if (
     gameBoard.row1[2] === "X" &&
     gameBoard.row2[1] === "X" &&
@@ -397,6 +420,7 @@ function krisCrossX() {
   ) {
     clearGameBoard();
     xWinnerTextBanner("X is the Winner Kris-Kros!");
+    addPointPlayerX();
   }
 }
 
@@ -408,6 +432,7 @@ function krisCrossO() {
   ) {
     clearGameBoard();
     oWinnerTextBanner("O is the Winner Kris-Kros!");
+    addPointPlayerO();
   } else if (
     gameBoard.row1[2] === "O" &&
     gameBoard.row2[1] === "O" &&
@@ -415,5 +440,6 @@ function krisCrossO() {
   ) {
     oWinnerTextBanner("O is the Winner Kris-Kros!");
     clearGameBoard();
+    addPointPlayerO();
   }
 }
