@@ -12,7 +12,7 @@ body {
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background-color: #15273a;
+  background-color: #121f2d;
 }
 .scoreboard {
   display: flex;
@@ -45,7 +45,6 @@ body {
 }
 
 .container {
-  /* border: 1px solid red; */
   width: 50%;
   display: flex;
   flex-direction: column;
@@ -62,12 +61,6 @@ body {
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.6),
     inset 0px -1px 8px rgba(0, 0, 0, 0.5);
   border: 2px solid #41454b;
-}
-
-h1 {
-  margin-bottom: 20px;
-  font-size: 24px;
-  color: #fff;
 }
 
 .row {
@@ -184,28 +177,14 @@ h1 {
   background: linear-gradient(90deg, #4caf50, #2196f3);
   margin: 10px auto 0;
   border-radius: 2px;
-  /* margin: auto; */
 }
-/* .tic,
-.tac,
-.toe {
-  font-size: 30px;
-} */
-/* .tic {
-  color: #2cce34;
-}
-.tac {
-  color: #2196f3;
-}
-.toe {
-  color: #ef9f36;
-} */
+
 #timer {
   font-size: 25px;
   font-weight: bold;
   text-align: center;
   margin-top: 20px;
-  color: #4caf50; /* Green color */
+  color: #4caf50;
   border: 2px solid #4caf50;
   border-radius: 8px;
   display: inline-block;
@@ -226,54 +205,17 @@ h1 {
   cursor: pointer;
   font-weight: 600;
   transition: box-shadow 0.3s ease, border-color 0.3s ease;
-  pointer-events: none;
+  transition: background-color 0.3s ease;
 }
 .cell:hover {
   border-color: var(--glow-color);
   box-shadow: 0 0 12px var(--glow-color);
   transition: box-shadow 0.3s ease, border-color 0.3s ease;
 }
-.cell {
-  width: 100px;
-  height: 100px;
-
-  font-size: 30px;
-
-  transition: background-color 0.3s ease;
-  pointer-events: none;
-  /* font-family: "Courier New", Courier, monospace; */
-  /* opacity: 0.3; */
-}
-/* .cell:hover {
-  background-color: #b3b6b3;
-  transition: background-color 0.3s ease;
-} */
-/* .cell:hover {
-  border-color: #d9edf0;
-  box-shadow: 0 0 10px 3px #d9edf0;
-} */
-/* .cell {
-  border: 2px solid transparent;
-  transition: border-color 0.3s, box-shadow 0.3s;
-} */
-
-/* .reset-button {
-  background-color: #dc3545;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  font-size: 1rem;
-  font-weight: bold;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
-.reset-button:hover {
-  background-color: #b02a37;
-} */
 
 .reset-button {
   background-color: #ff4c4c;
+  transition: background-color 0.3s;
   color: #ffffff;
   padding: 12px 25px;
   font-size: 16px;
@@ -288,8 +230,8 @@ h1 {
 .reset-button:hover {
   background-color: #ae2626;
   box-shadow: 0px 4px 10px rgba(223, 59, 59, 0.6);
-  /* transform: scale(1.01); */
-  transition: all 0.3s ease-in-out;
+
+  transition: all 0.4s ease-in-out;
 }
 .reset-button:active {
   background-color: #d93c3c;
