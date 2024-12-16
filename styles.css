@@ -70,7 +70,7 @@ body {
 }
 
 .disabled {
-  opacity: 0.5; /* Adjust opacity as needed */
+  opacity: 0.5;
   pointer-events: none;
 }
 
@@ -78,7 +78,7 @@ body {
   margin-top: 10px;
 }
 .winner-banner-text {
-  background-color: #2d2f33; /* Dark background matching theme */
+  background-color: #2d2f33;
   color: dodgerblue;
   font-size: 24px;
   font-weight: bold;
@@ -101,8 +101,68 @@ body {
   font-weight: 500;
   font-family: Quicksand, Geneva, Tahoma, sans-serif;
 }
-#final-game-winner {
+.final-game-winner {
+  /* display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 2rem auto;
+  padding: 1.5rem 2rem;
+  background: #212121;
+  border-radius: 12px;
+  position: relative;
+  overflow: hidden;
+  color: white;
+
+  text-transform: uppercase;
+  text-align: center;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4); */
+  background-color: #2d2f33; /* Dark background matching theme */
+  color: #ffffff;
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+  padding: 15px 20px;
+  border-radius: 12px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.6);
+  margin: 20px auto;
+  max-width: 400px;
+  transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+  /*opacity: 0;  Hidden by default 
+   display: none;*/
+  display: none;
+  transform: scale(0.9);
+  background: linear-gradient(90deg, #4caf50, #2196f3);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  position: relative;
+  animation: glow 3s infinite alternate;
+}
+@keyframes glow {
+  from {
+    text-shadow: 0 0 10px #4caf50, 0 0 20px #4caf50;
+  }
+  to {
+    text-shadow: 0 0 10px #2196f3, 0 0 20px #2196f3;
+  }
+}
+.final-game-winner:after {
+}
+/* .final-game-winner h3 {
+  margin: 0;
+  font-size: 2rem;
+  letter-spacing: 2px;
   color: #fff;
+} */
+@keyframes glow-effect {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
 .start-button,
 .new-game-button {

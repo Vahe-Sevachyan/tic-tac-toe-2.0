@@ -12,6 +12,7 @@ const resetFinalScoreButton = document.querySelector(".reset-button");
 const playerXScore = document.querySelector("#scoreX");
 const playerOScore = document.querySelector("#scoreO");
 const winnerBannerText = document.querySelector(".winner-banner-text");
+const finalGameWinnerBannerText = document.querySelector(".final-game-winner");
 let currentPlayer = "Player 1"; // Can be 'Player 1' or 'Player 2'
 let countdown = 10;
 let turn = "X";
@@ -49,12 +50,14 @@ function resetFinalGameScore() {
 }
 function checkFinalGameWinner() {
   if (playerX.score === 5) {
-    statusText.innerHTML = `Game Over Player X Wins${playerX.score} to ${playerO.score}`;
+    finalGameWinnerBannerText.innerHTML = `Game Over Player X Wins ${playerX.score} to ${playerO.score}`;
     timerElement.style.display = "none";
+    finalGameWinnerBannerText.style.display = "inline-block";
     winnerBannerText.style.display = "none";
     newGameButton.disabled = true;
   } else if (playerO.score === 5) {
-    statusText.innerHTML = `Game Over Player O Wins${playerO.score} to ${playerX.score}`;
+    finalGameWinnerBannerText.innerHTML = `Game Over Player O Wins ${playerO.score} to ${playerX.score}`;
+    finalGameWinnerBannerText.style.display = "inline-block";
     timerElement.style.display = "none";
     winnerBannerText.style.display = "none";
     newGameButton.disabled = true;
@@ -65,6 +68,8 @@ resetFinalScoreButton.addEventListener("click", () => {
   startNewGameButton();
   resetFinalGameScore();
   newGameButton.disabled = false;
+  finalGameWinnerBannerText.style.display = "none";
+  finalGameWinnerBannerText.innerHTML = "";
 });
 function addPointPlayerX() {
   playerX.score += 1;
