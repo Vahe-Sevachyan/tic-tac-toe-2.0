@@ -54,11 +54,12 @@ function checkFinalGameWinner() {
   if (playerX.score === 5) {
     statusText.innerHTML = `Game Over Player X Wins${playerX.score} to ${playerO.score}`;
     timerElement.style.display = "none";
+    winnerBannerText.style.display = "none";
     newGameButton.disabled = true;
-    console.log("code reached here");
   } else if (playerO.score === 5) {
     statusText.innerHTML = `Game Over Player O Wins${playerO.score} to ${playerX.score}`;
     timerElement.style.display = "none";
+    winnerBannerText.style.display = "none";
     newGameButton.disabled = true;
   }
 }
