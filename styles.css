@@ -362,6 +362,10 @@ body {
   }
   .game-title {
     font-size: 16px;
+    margin: -9px 10px 13px 10px;
+  }
+  .button-container {
+    margin-bottom: -11px;
   }
   .winner-banner-text {
     font-size: 16px;
