@@ -339,8 +339,10 @@ body {
   }
   .start-button,
   .new-game-button {
-    padding: 8px 10px;
+    margin: auto;
+    padding: 4px 9px;
     font-size: 12px;
+    border-radius: 3px;
   }
   #timer {
     font-size: 15px;
@@ -365,7 +367,8 @@ body {
     margin: -9px 10px 13px 10px;
   }
   .button-container {
-    margin-bottom: -11px;
+    margin-bottom: -7px;
+    display: flex;
   }
   .winner-banner-text {
     font-size: 16px;
