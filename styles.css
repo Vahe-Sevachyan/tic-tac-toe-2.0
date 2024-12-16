@@ -310,10 +310,21 @@ body {
     width: 80px;
     height: 80px;
   }
+  .start-button,
+  .new-game-button {
+    padding: 8px 10px;
+    font-size: 12px;
+  }
+  #timer {
+    font-size: 15px;
+    padding: 10px 20px;
+  }
   .game-container {
     width: 300px;
   }
-
+  .score {
+    font-size: 16px;
+  }
   .reset-button {
     padding: 9px 15px;
     font-size: 12px;
@@ -332,7 +343,7 @@ body {
   }
 
   .scoreboard .score {
-    font-size: 1.5rem;
+    /* font-size: 1.5rem; */
   }
 
   .scoreboard .reset {
