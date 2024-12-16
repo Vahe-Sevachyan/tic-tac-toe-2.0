@@ -1,9 +1,6 @@
 const cells = document.querySelectorAll(".cell");
 const rowActive = document.querySelectorAll(".row");
 const startButton = document.querySelector(".start-button");
-const difficultyLevelEasyBtn = document.querySelector(".easy");
-const difficultyLevelMedium = document.querySelector(".medium");
-const difficultyLevelHard = document.querySelector(".hard");
 const timerElement = document.getElementById("timer");
 const gameOverText = document.querySelector(".gameOverText");
 const statusText = document.querySelector(".status-text");
@@ -25,7 +22,7 @@ timerElement.style.color = "grey";
 timerElement.style.borderColor = "grey";
 timerElement.style.opacity = 0.3;
 cells.forEach((cell) => {
-  //deactivate gameBoard
+  //deactivate gameBoard on initial start up
   cell.style.pointerEvents = "none";
   cell.style.opacity = 0.1;
 });
@@ -46,12 +43,15 @@ const playerO = {
   pick: "",
   score: 0,
 };
+
+//resets final game board score
 function resetFinalGameScore() {
   playerX.score = 0;
   playerO.score = 0;
   playerXScore.innerHTML = `Score: ${playerX.score}`;
   playerOScore.innerHTML = `Score: ${playerO.score}`;
 }
+//checks final game winner and displays the winner
 function checkFinalGameWinner() {
   if (playerX.score === 5) {
     finalGameWinnerBannerText.innerHTML = `Game Over Player X Wins ${playerX.score} to ${playerO.score}`;
@@ -67,7 +67,7 @@ function checkFinalGameWinner() {
     newGameButton.disabled = true;
   }
 }
-
+//resets final score board button
 resetFinalScoreButton.addEventListener("click", () => {
   startNewGameButton();
   resetFinalGameScore();
