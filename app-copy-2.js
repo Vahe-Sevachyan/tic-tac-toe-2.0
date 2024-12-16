@@ -18,7 +18,7 @@ let winner = null;
 let gameModeChosen = "";
 let intervalX;
 let intervalO;
-startButton.disabled = true;
+// startButton.disabled = true;
 timerElement.style.color = "grey";
 timerElement.style.borderColor = "grey";
 timerElement.style.opacity = 0.3;
@@ -143,9 +143,9 @@ function startNewGameButton() {
   timerElement.style.color = "grey";
   timerElement.style.borderColor = "grey";
   timerElement.innerHTML = "10";
-  startButton.style.backgroundColor = "grey";
+  startButton.style.backgroundColor = "4caf50";
   startButton.disabled = false;
-  startButton.style.backgroundColor = "dodgerBlue";
+  // startButton.style.backgroundColor = "dodgerBlue";
   statusText.style.color = "dodgerBlue";
 }
 
