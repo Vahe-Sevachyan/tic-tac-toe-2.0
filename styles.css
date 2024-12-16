@@ -321,9 +321,9 @@ body {
 /* Responsive Styles */
 @media (max-width: 768px) {
   .scoreboard {
-    flex-direction: column;
+    flex-direction: row;
     /* text-align: center; */
-    width: 87%;
+    width: 84%;
     padding: 12px 16px;
     margin-bottom: 15px;
     justify-content: center;
@@ -333,6 +333,9 @@ body {
     /* align-items: center; */
     /* justify-content: center; */
   }
+  .player h2 {
+    font-size: 15px;
+  }
   .cell {
     width: 60px;
     height: 60px;
@@ -340,9 +343,9 @@ body {
   .start-button,
   .new-game-button {
     margin: auto;
-    padding: 4px 9px;
+    padding: 5px 9px;
     font-size: 12px;
-    border-radius: 3px;
+    border-radius: 5px;
   }
   #timer {
     font-size: 15px;
@@ -360,7 +363,7 @@ body {
     font-size: 13px;
   }
   .score {
-    font-size: 16px;
+    font-size: 14px;
   }
   .game-title {
     font-size: 16px;
@@ -378,24 +381,8 @@ body {
   .reset-button {
     padding: 9px 15px;
     font-size: 10px;
-    margin-bottom: 10px;
+    margin-bottom: -5px;
     margin-top: 0px;
-  }
-
-  .scoreboard .player {
-    margin-bottom: 10px;
-  }
-
-  .scoreboard .player:last-child {
-    margin-bottom: 0;
-  }
-
-  .scoreboard .player h2 {
-    font-size: 15px;
-  }
-
-  .scoreboard .score {
-    /* font-size: 1.5rem; */
   }
   .game-title ::after {
     width: 50px;
@@ -404,6 +391,9 @@ body {
   .scoreboard .reset {
     width: 100%;
     padding: 10px;
+  }
+  h2 {
+    font-size: 5px;
   }
 }
 
