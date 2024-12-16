@@ -24,7 +24,11 @@ let intervalO;
 timerElement.style.color = "grey";
 timerElement.style.borderColor = "grey";
 timerElement.style.opacity = 0.3;
-
+cells.forEach((cell) => {
+  //deactivate gameBoard
+  cell.style.pointerEvents = "none";
+  cell.style.opacity = 0.1;
+});
 const gameBoard = {
   row1: ["", "", ""],
   row2: ["", "", ""],
