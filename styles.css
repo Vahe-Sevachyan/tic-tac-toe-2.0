@@ -307,8 +307,8 @@ body {
     margin-bottom: 15px;
   }
   .cell {
-    width: 80px;
-    height: 80px;
+    width: 60px;
+    height: 60px;
   }
   .start-button,
   .new-game-button {
@@ -318,12 +318,28 @@ body {
   #timer {
     font-size: 15px;
     padding: 10px 20px;
+    margin-top: 10px;
+  }
+  .final-game-winner {
+    padding: 8px 10px;
+    font-size: 12px;
   }
   .game-container {
-    width: 300px;
+    width: 250px;
+  }
+  .status-text {
+    font-size: 13px;
   }
   .score {
     font-size: 16px;
+  }
+  .game-title {
+    font-size: 16px;
+  }
+  .winner-banner-text {
+    font-size: 16px;
+    padding: 8px 8px;
+    margin: 6px 9px -2px 9px;
   }
   .reset-button {
     padding: 9px 15px;
@@ -345,7 +361,9 @@ body {
   .scoreboard .score {
     /* font-size: 1.5rem; */
   }
-
+  .game-title ::after {
+    width: 50px;
+  }
   .scoreboard .reset {
     width: 100%;
     padding: 10px;
