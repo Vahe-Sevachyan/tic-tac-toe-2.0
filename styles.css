@@ -350,11 +350,13 @@ body {
   #timer {
     font-size: 15px;
     padding: 10px 20px;
-    margin-top: 10px;
+    margin-top: 5px;
   }
   .final-game-winner {
     padding: 8px 10px;
     font-size: 12px;
+    margin-top: 0px;
+    margin-bottom: 11px;
   }
   .game-container {
     width: 242px;
@@ -376,7 +378,7 @@ body {
   .winner-banner-text {
     font-size: 16px;
     padding: 8px 8px;
-    margin: 6px 9px -2px 9px;
+    margin: 5px 9px -2px 9px;
   }
   .reset-button {
     padding: 9px 13px;
