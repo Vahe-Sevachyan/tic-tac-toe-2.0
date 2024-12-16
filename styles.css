@@ -298,3 +298,55 @@ body {
   transform: scale(0.9);
   transition: all 0.5s ease-in-out;
 }
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .scoreboard {
+    flex-direction: column;
+    text-align: center;
+    padding: 12px 16px;
+    margin-bottom: 15px;
+  }
+  .reset-button {
+    padding: 9px 15px;
+    font-size: 12px;
+    margin-bottom: 10px;
+  }
+  .scoreboard .player {
+    margin-bottom: 10px;
+  }
+
+  .scoreboard .player:last-child {
+    margin-bottom: 0;
+  }
+
+  .scoreboard .player h2 {
+    font-size: 1.2rem;
+  }
+
+  .scoreboard .score {
+    font-size: 1.5rem;
+  }
+
+  .scoreboard .reset {
+    width: 100%;
+    padding: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .scoreboard {
+    padding: 8px 12px;
+  }
+
+  .scoreboard .player h2 {
+    font-size: 1rem;
+  }
+
+  .scoreboard .score {
+    font-size: 1.2rem;
+  }
+
+  .scoreboard .reset {
+    font-size: 0.9rem;
+  }
+}
