@@ -6,6 +6,8 @@
 
 ---
 
+## [Click Here](https://vahe-sevachyan.github.io/tic-tac-toe-2.0/) To Play The Game Live!
+
 ## Features 🌟
 
 ### 🎲 Gameplay
