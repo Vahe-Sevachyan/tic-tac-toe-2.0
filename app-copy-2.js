@@ -11,6 +11,7 @@ const newGameButton = document.querySelector(".new-game-button");
 const resetFinalScoreButton = document.querySelector(".reset-button");
 const playerXScore = document.querySelector("#scoreX");
 const playerOScore = document.querySelector("#scoreO");
+const winnerBannerText = document.querySelector(".winner-banner-text");
 let currentPlayer = "Player 1"; // Can be 'Player 1' or 'Player 2'
 let countdown = 10;
 let turn = "X";
@@ -145,6 +146,9 @@ function startNewGameButton() {
   timerElement.innerHTML = "10";
   startButton.style.backgroundColor = "4caf50";
   startButton.disabled = false;
+  winnerBannerText.textContent = "";
+  winnerBannerText.style.display = "none";
+  winnerBannerText.style.opacity = 0;
   // startButton.style.backgroundColor = "dodgerBlue";
   statusText.style.color = "dodgerBlue";
 }
@@ -290,9 +294,14 @@ function interval_O_Timer() {
 }
 
 function xWinnerTextBanner(displayText) {
-  timerElement.textContent = displayText;
-  timerElement.style.color = "dodgerBlue";
-  timerElement.style.borderColor = "dodgerBlue";
+  winnerBannerText.textContent = displayText;
+  winnerBannerText.style.display = "inline-block";
+  winnerBannerText.style.opacity = 1;
+  timerElement.style.display = "none";
+  // timerElement.style.color = "dodgerBlue";
+  // timerElement.style.borderColor = "dodgerBlue";
+  // timerElement.classList.add("winner-banner-text");
+  // timerElement.classList.remove("timer");
 }
 
 function oWinnerTextBanner(displayText) {

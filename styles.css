@@ -102,7 +102,22 @@ h1 {
 .status {
   margin-top: 20px;
 }
-
+.winner-banner-text {
+  background-color: #2d2f33; /* Dark background matching theme */
+  color: dodgerblue;
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+  padding: 15px 20px;
+  border-radius: 12px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.6);
+  margin: 10px;
+  max-width: 400px;
+  transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
+  opacity: 0; /* Hidden by default */
+  transform: scale(0.9);
+  display: none; /* Initially hidden */
+}
 .status-text {
   font-size: 23px;
   margin-bottom: 10px;
@@ -120,7 +135,7 @@ h1 {
   cursor: pointer;
   transition: all 0.3s ease-in-out;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.4);
-  margin: 10px;
+  margin: 8px;
   display: inline-block;
 }
 .new-game-button {
@@ -145,6 +160,7 @@ h1 {
 .timer {
   margin-top: 10px;
 }
+
 #timer {
   font-size: 25px;
   font-weight: bold;
