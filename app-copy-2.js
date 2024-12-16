@@ -305,9 +305,14 @@ function xWinnerTextBanner(displayText) {
 }
 
 function oWinnerTextBanner(displayText) {
-  timerElement.textContent = displayText;
-  timerElement.style.color = "green";
-  timerElement.style.borderColor = "green";
+  // timerElement.textContent = displayText;
+  // timerElement.style.color = "green";
+  // timerElement.style.borderColor = "green";
+  winnerBannerText.textContent = displayText;
+  winnerBannerText.style.display = "inline-block";
+  winnerBannerText.style.color = "#2e9231";
+  winnerBannerText.style.opacity = 1;
+  timerElement.style.display = "none";
 }
 
 function winnerCheck() {

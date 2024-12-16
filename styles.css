@@ -1,7 +1,9 @@
+@import url("https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Manrope:wght@200..800&family=Quicksand:wght@300..700&display=swap");
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: Quicksand, Geneva, Tahoma, sans-serif;
 }
 
 body {
@@ -123,6 +125,8 @@ h1 {
   font-size: 23px;
   margin-bottom: 10px;
   color: #fff;
+  font-weight: 500;
+  font-family: Quicksand, Geneva, Tahoma, sans-serif;
 }
 .start-button,
 .new-game-button {
@@ -161,7 +165,58 @@ h1 {
 .timer {
   margin-top: 10px;
 }
-
+.game-title {
+  margin-bottom: 18px;
+  display: flex;
+  justify-content: center;
+  font-family: "Poppins", sans-serif; /* Modern, clean font */
+  font-size: 27px;
+  font-weight: 700;
+  color: #ffffff; /* Bright text */
+  text-align: center;
+  margin: 20px 0;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  background: linear-gradient(90deg, #4caf50, #2196f3);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  position: relative;
+  animation: glow 3s infinite alternate;
+}
+/* Subtle Glow Animation */
+@keyframes glow {
+  from {
+    text-shadow: 0 0 10px #4caf50, 0 0 20px #4caf50;
+  }
+  to {
+    text-shadow: 0 0 10px #2196f3, 0 0 20px #2196f3;
+  }
+}
+.game-title ::after {
+  content: "";
+  display: flex;
+  justify-content: space-around;
+  width: 70px;
+  height: 4px;
+  background: linear-gradient(90deg, #4caf50, #2196f3);
+  margin: 10px auto 0;
+  border-radius: 2px;
+  /* margin: auto; */
+}
+/* .tic,
+.tac,
+.toe {
+  font-size: 30px;
+} */
+/* .tic {
+  color: #2cce34;
+}
+.tac {
+  color: #2196f3;
+}
+.toe {
+  color: #ef9f36;
+} */
 #timer {
   font-size: 25px;
   font-weight: bold;
